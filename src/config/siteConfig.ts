@@ -23,8 +23,8 @@ export const siteConfig = {
 
   // Contact Information (Temporary testing details)
   phone: "9632494070",
-  whatsappNumber: "910000000000", // Digits only with country code (e.g. "919876543210")
-  whatsappDisplay: "[CLIENT WHATSAPP - TO BE PROVIDED]",
+  whatsappNumber: "919632494070", // Digits only with country code
+  whatsappDisplay: "+91 9632494070",
   email: "deexith555@gmail.com",
   address: "Udupi, Karnataka",
   googleMapsUrl: "",
