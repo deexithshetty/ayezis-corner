@@ -53,7 +53,7 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
         <div className="bg-[#4A0E18] text-[#FAF7F2] px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#DFBE7A]" />
-            <h3 className="font-serif text-xl font-bold">Get a Quote</h3>
+            <h3 className="font-serif text-xl font-bold">Enquire with Us</h3>
           </div>
           <button
             onClick={onClose}
@@ -86,7 +86,7 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
                   className="w-full py-2.5 text-xs font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-md transition-colors flex items-center justify-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
-                  <span>Send details via WhatsApp</span>
+                  <span>Send Details on WhatsApp</span>
                 </a>
                 <button
                   onClick={onClose}
@@ -141,22 +141,26 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                   className="w-full px-3 py-2 text-sm bg-white rounded-md border border-[#D8CEBE] focus:outline-hidden focus:ring-1 focus:ring-[#7D1D2C] focus:border-[#7D1D2C]"
                 >
-                  <option value="Event Decoration">Event Decoration</option>
-                  <option value="Wedding & Party Decor">Wedding &amp; Party Decor</option>
-                  <option value="Customized Gifts">Customized Gifts</option>
-                  <option value="Corporate Gifting">Corporate Gifting</option>
-                  <option value="Personalized Gifts">Personalized Gifts</option>
-                  <option value="Other">Other Custom Request</option>
+                  <option value="Wedding & Bridal Gifting / Decor">Wedding &amp; Bridal Gifting / Decor</option>
+                  <option value="Baby & Newborn Celebrations">Baby &amp; Newborn Celebrations</option>
+                  <option value="Housewarming & Home Gifting">Housewarming &amp; Home Gifting</option>
+                  <option value="Corporate Customized Gifting">Corporate Customized Gifting</option>
+                  <option value="Personalized Hampers & Gifts">Personalized Hampers &amp; Gifts</option>
+                  <option value="Event Decoration Setup">Event Decoration Setup</option>
+                  <option value="Combined Gifting & Décor Package">Combined Gifting &amp; Décor Package</option>
+                  <option value="Return Gifts & Event Favours">Return Gifts &amp; Event Favours</option>
+                  <option value="Festive & Traditional Celebration">Festive &amp; Traditional Celebration</option>
+                  <option value="Other Custom Request">Other Custom Request</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#4A3E3D] mb-1">
-                  Message / Ideas
+                  Occasion &amp; Customization Details
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="Date, location, or customization details..."
+                  placeholder="Date, location, themes, or customization details..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-3 py-2 text-sm bg-white rounded-md border border-[#D8CEBE] focus:outline-hidden focus:ring-1 focus:ring-[#7D1D2C] focus:border-[#7D1D2C]"
@@ -167,7 +171,7 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
                 type="submit"
                 className="w-full py-2.5 text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#7D1D2C] hover:bg-[#661320] rounded-md transition-colors shadow-xs flex items-center justify-center gap-1.5 cursor-pointer mt-1"
               >
-                <span>Submit Quote Request</span>
+                <span>Submit Enquiry</span>
                 <Send className="w-3.5 h-3.5" />
               </button>
             </form>

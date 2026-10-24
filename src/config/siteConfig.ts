@@ -8,32 +8,30 @@
 export const siteConfig = {
   // Business Information
   businessName: "Ayezis Corner",
-  tagline: "Event Decoration & Customized Gifts",
+  tagline: "Thoughtful Gifts. Beautiful Celebrations.",
   logo: "/logo.png", // Located in public/logo.png (falls back to text wordmark if missing)
 
-  // Hero Copy
-  heroLabel: "EVENT DECORATION & CUSTOMIZED GIFTS",
-  heroHeadline: "Beautiful Moments,\nThoughtfully Created.",
-  heroDescription:
-    "Event decoration and customized gifts made to make every celebration special.",
+  // Short Brand Positioning
+  shortDescription:
+    "At Ayezis Corner, we bring special moments to life through thoughtfully curated gifts, personalized hampers, and beautiful decorations. From intimate celebrations to special occasions, we create memorable experiences with creativity, elegance, and attention to detail.",
 
-  // Contact Information (Update with client verified details)
-  phone: "[CLIENT PHONE - TO BE PROVIDED]",
+  // Hero Copy
+  heroLabel: "THOUGHTFUL GIFTS · BEAUTIFUL CELEBRATIONS",
+  heroHeadline: "Thoughtful Gifts.\nBeautiful Celebrations.",
+  heroDescription:
+    "From thoughtfully curated gifts and personalized hampers to beautiful decorations, we design memorable experiences for your special celebrations with creativity and elegance.",
+
+  // Contact Information (Temporary testing details)
+  phone: "9632494070",
   whatsappNumber: "910000000000", // Digits only with country code (e.g. "919876543210")
   whatsappDisplay: "[CLIENT WHATSAPP - TO BE PROVIDED]",
-  email: "[CLIENT EMAIL - TO BE PROVIDED]",
-  address: "[CLIENT ADDRESS - TO BE PROVIDED]",
-  googleMapsUrl: "https://maps.google.com/?q=Ayezis+Corner",
+  email: "deexith555@gmail.com",
+  address: "Udupi, Karnataka",
+  googleMapsUrl: "",
 
   // Social Links
   instagramUrl: "https://www.instagram.com/ayezis_corner/",
   instagramHandle: "@ayezis_corner",
-
-  // Business Highlights
-  stats: {
-    customers: "9.2K+ happy customers",
-    shipping: "Pan-India & worldwide shipping",
-  },
 
   // Default WhatsApp Message
   defaultWhatsappMessage:

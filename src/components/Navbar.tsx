@@ -22,7 +22,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
+    { label: 'Gifting', href: '#gifting' },
+    { label: 'Decoration', href: '#decoration' },
+    { label: 'Packages', href: '#packages' },
     { label: 'Gallery', href: '#gallery' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -36,7 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             : 'bg-[#FAF7F2] border-b border-[#E8DFD3]/60'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-6">
           {/* Logo with safe text fallback if /logo.png is not found */}
           <a
             href="#home"
@@ -58,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
           </a>
 
           {/* Clean Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#4A3E3D]">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-[#4A3E3D]">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -86,13 +88,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               onClick={onOpenQuoteModal}
               className="px-4 py-2 text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#7D1D2C] hover:bg-[#661320] active:scale-95 transition-all rounded-md shadow-xs whitespace-nowrap cursor-pointer"
             >
-              Get a Quote
+              Enquire Now
             </button>
 
             {/* Mobile menu hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#4A0E18] hover:bg-[#F3ECE2] rounded-md transition-colors"
+              className="lg:hidden p-2 text-[#4A0E18] hover:bg-[#F3ECE2] rounded-md transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -103,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-18 z-30 md:hidden bg-[#FAF7F2] border-b border-[#E8DFD3] px-6 py-6 shadow-xl flex flex-col gap-4 animate-in slide-in-from-top-2">
+        <div className="fixed inset-x-0 top-18 z-30 lg:hidden bg-[#FAF7F2] border-b border-[#E8DFD3] px-6 py-6 shadow-xl flex flex-col gap-3 animate-in slide-in-from-top-2">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -122,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               }}
               className="w-full py-2.5 text-center text-sm font-semibold text-[#FAF7F2] bg-[#7D1D2C] rounded-md"
             >
-              Get a Quote
+              Enquire Now
             </button>
             <a
               href={getWhatsAppLink()}

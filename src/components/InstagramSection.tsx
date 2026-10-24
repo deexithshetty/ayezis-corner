@@ -21,7 +21,7 @@ export const InstagramSection: React.FC = () => {
               Follow Ayezis Corner
             </h2>
             <p className="text-xs sm:text-sm text-[#61524F]">
-              {siteConfig.instagramHandle} · 9.2K+ happy customers
+              {siteConfig.instagramHandle} · {siteConfig.tagline}
             </p>
           </div>
 

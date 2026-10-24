@@ -7,7 +7,10 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
+import { GiftingSection } from './components/GiftingSection';
+import { DecorationSection } from './components/DecorationSection';
+import { PackagesSection } from './components/PackagesSection';
+import { HowItWorksSection } from './components/HowItWorksSection';
 import { GallerySection } from './components/GallerySection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 import { InstagramSection } from './components/InstagramSection';
@@ -26,34 +29,43 @@ export default function App() {
 
       <main className="flex-1">
         {/* 2. Hero Section - Visually impressive image focus */}
-        <Hero />
+        <Hero onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
 
-        {/* 3. About Section - Short 2-3 paragraphs with side image */}
+        {/* 3. About Section - Client business positioning */}
         <AboutSection />
 
-        {/* 4. Services Section - 6 attractive visual cards */}
-        <ServicesSection />
+        {/* 4. Gifting Services - 9 Client curated categories */}
+        <GiftingSection />
 
-        {/* 5. Featured Work / Gallery - Instagram-style masonry portfolio */}
+        {/* 5. Decoration Services - 7 Occasions & 8 Décor Elements */}
+        <DecorationSection />
+
+        {/* 6. Combined Packages & Customization Features */}
+        <PackagesSection />
+
+        {/* 7. How It Works - 4 Step seamless experience */}
+        <HowItWorksSection />
+
+        {/* 8. Featured Work / Gallery - Editorial portfolio */}
         <GallerySection />
 
-        {/* 6. Why Choose Us - Simple 4-point strip */}
+        {/* 9. Why Choose Ayezis Corner */}
         <WhyChooseUsSection />
 
-        {/* 7. Instagram Section - @ayezis_corner preview tiles */}
+        {/* 10. Instagram Section - @ayezis_corner preview */}
         <InstagramSection />
 
-        {/* 8. Contact / Enquiry Section - Simple form & direct contact channels */}
+        {/* 11. Final Contact / Enquiry Section */}
         <ContactSection />
       </main>
 
-      {/* 9. Footer */}
+      {/* 12. Footer */}
       <Footer />
 
-      {/* 10. Floating WhatsApp button */}
+      {/* 13. Floating WhatsApp button */}
       <WhatsAppFloatingButton />
 
-      {/* 11. Quick Quote Modal */}
+      {/* 14. Quick Enquiry Modal */}
       <QuickQuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}

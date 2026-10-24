@@ -22,7 +22,9 @@ export const Footer: React.FC = () => {
         <nav className="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-[#E8DFD3]/85">
           <a href="#home" className="hover:text-white transition-colors">Home</a>
           <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#services" className="hover:text-white transition-colors">Services</a>
+          <a href="#gifting" className="hover:text-white transition-colors">Gifting</a>
+          <a href="#decoration" className="hover:text-white transition-colors">Decoration</a>
+          <a href="#packages" className="hover:text-white transition-colors">Packages</a>
           <a href="#gallery" className="hover:text-white transition-colors">Gallery</a>
           <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </nav>

@@ -1,9 +1,13 @@
 import React from 'react';
-import { ArrowDown, MessageCircle, Sparkles } from 'lucide-react';
-import { siteConfig, getWhatsAppLink } from '../config/siteConfig';
+import { ArrowDown, Sparkles } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 import { ResilientImage } from './ResilientImage';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenQuoteModal?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
   return (
     <section id="home" className="relative pt-6 sm:pt-10 pb-16 lg:pb-24 bg-[#FAF7F2] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,33 +20,30 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#32070F] leading-[1.12]">
-            {siteConfig.heroHeadline}
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#32070F] leading-[1.14]">
+            Thoughtful Gifts.<br className="hidden sm:inline" /> Beautiful Celebrations.
           </h1>
 
-          {/* Short description */}
-          <p className="text-base sm:text-lg text-[#5A4D4A] max-w-xl mx-auto leading-relaxed [text-wrap:pretty]">
-            {siteConfig.heroDescription}
+          {/* Supporting message */}
+          <p className="text-base sm:text-lg text-[#5A4D4A] max-w-2xl mx-auto leading-relaxed [text-wrap:pretty]">
+            Thoughtfully curated gifts, personalized hampers, and beautiful decorations crafted to bring creativity, elegance, and warmth to your customized celebrations.
           </p>
 
-          {/* Buttons: Explore Our Work & WhatsApp Us */}
+          {/* Primary CTA: "Enquire Now", Secondary CTA: "Explore Services" */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <a
-              href="#gallery"
+            <button
+              onClick={onOpenQuoteModal}
               className="px-6 py-3.5 text-sm sm:text-base font-semibold text-[#FAF7F2] bg-[#7D1D2C] hover:bg-[#661320] active:scale-[0.98] transition-all rounded-md shadow-md flex items-center gap-2 whitespace-nowrap cursor-pointer"
             >
-              <span>Explore Our Work</span>
-              <ArrowDown className="w-4 h-4" />
-            </a>
+              <span>Enquire Now</span>
+            </button>
 
             <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3.5 text-sm sm:text-base font-semibold text-[#1E7E34] hover:bg-[#25D366]/10 active:scale-[0.98] transition-all rounded-md border border-[#25D366]/40 flex items-center gap-2 whitespace-nowrap cursor-pointer"
+              href="#gifting"
+              className="px-6 py-3.5 text-sm sm:text-base font-semibold text-[#4A0E18] bg-[#F3ECE2] hover:bg-[#EAE0D2] active:scale-[0.98] transition-all rounded-md border border-[#D8CEBE] flex items-center gap-2 whitespace-nowrap cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
-              <span>WhatsApp Us</span>
+              <span>Explore Services</span>
+              <ArrowDown className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -51,13 +52,13 @@ export const Hero: React.FC = () => {
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#D8CEBE] bg-[#EAE0D2]">
           <div className="relative aspect-16/10 sm:aspect-21/9 min-h-[360px] max-h-[620px] w-full">
             <ResilientImage
-              src="/images/hero.jpg"
-              alt="Ayezis Corner Luxury Event Decoration"
+              src="/images/decorations/decorations-09.jpeg"
+              alt="Ayezis Corner Event Decoration and Thoughtful Gifting"
               className="w-full h-full object-cover"
               fallbackTitle="Ayezis Corner Event Styling"
             />
 
-            {/* Subtle Gradient Scrim at bottom with elegant trust markers */}
+            {/* Subtle Gradient Scrim at bottom */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-6 sm:p-10 text-white">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 max-w-5xl">
                 <div className="space-y-1">
@@ -65,13 +66,15 @@ export const Hero: React.FC = () => {
                     Instagram: {siteConfig.instagramHandle}
                   </span>
                   <p className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold">
-                    Bespoke Event Styling · Personalized Keepsakes
+                    Customized Celebrations · Thoughtful Keepsakes
                   </p>
                 </div>
                 <div className="flex items-center gap-3 text-xs sm:text-sm text-[#FAF7F2]/90">
-                  <span>✨ {siteConfig.stats.customers}</span>
+                  <span>Curated Hampers</span>
                   <span className="opacity-40">·</span>
-                  <span>{siteConfig.stats.shipping}</span>
+                  <span>Bespoke Event Décor</span>
+                  <span className="opacity-40">·</span>
+                  <span>Personalized Packages</span>
                 </div>
               </div>
             </div>

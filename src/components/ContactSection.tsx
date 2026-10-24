@@ -15,7 +15,7 @@ export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: 'Event Decoration',
+    service: 'Wedding Gifting & Décor',
     message: '',
   });
 
@@ -33,27 +33,40 @@ export const ContactSection: React.FC = () => {
   };
 
   const generateWhatsAppMessage = () => {
-    const text = `Hi Ayezis Corner, I'm reaching out from your website.\nName: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.service}\nMessage: ${formData.message}`;
+    const text = `Hi Ayezis Corner, I'm reaching out regarding your services.\nName: ${formData.name}\nPhone: ${formData.phone}\nOccasion/Service: ${formData.service}\nDetails: ${formData.message}`;
     return getWhatsAppLink(text);
   };
 
   return (
     <section id="contact" className="py-18 sm:py-24 bg-[#FFFDF9] border-t border-[#E8DFD3]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16 space-y-2">
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#7D1D2C]">
-            Get In Touch
-          </span>
+        {/* Section 8: Final CTA & Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 space-y-3">
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-[#7D1D2C]">
+            <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>Connect With Us</span>
+          </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#32070F]">
-            Let's Create Something Special
+            Let’s Make Your Occasion Special
           </h2>
-          <p className="text-sm sm:text-base text-[#61524F]">
-            Planning an event or looking for a customized gift? WhatsApp us directly or send a message below.
+          <p className="text-sm sm:text-base text-[#61524F] leading-relaxed [text-wrap:pretty]">
+            Whether you’re planning a wedding, baby shower, housewarming, corporate event, or a special surprise, Ayezis Corner is here to help.
           </p>
+
+          <div className="pt-2">
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] active:scale-[0.98] rounded-md shadow-md transition-all cursor-pointer"
+            >
+              <MessageCircle className="w-5 h-5 fill-white" />
+              <span>Enquire on WhatsApp</span>
+            </a>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start pt-4">
           {/* Direct Contact Channels (5 cols) */}
           <div className="md:col-span-5 bg-[#FAF7F2] p-6 sm:p-8 rounded-2xl border border-[#D8CEBE] space-y-6">
             <h3 className="font-serif text-2xl font-bold text-[#32070F]">
@@ -81,7 +94,7 @@ export const ContactSection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full mt-2 py-2.5 px-4 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-md transition-colors shadow-xs flex items-center justify-center gap-2"
               >
-                <span>Open WhatsApp Chat</span>
+                <span>Enquire on WhatsApp</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -95,7 +108,12 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-[#7A6B68]">Phone</p>
-                  <p className="font-medium font-mono text-[#32070F]">{siteConfig.phone}</p>
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    className="font-medium font-mono text-[#32070F] hover:text-[#7D1D2C] hover:underline transition-colors block"
+                  >
+                    {siteConfig.phone}
+                  </a>
                 </div>
               </div>
 
@@ -106,7 +124,12 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-[#7A6B68]">Email</p>
-                  <p className="font-medium font-mono text-[#32070F]">{siteConfig.email}</p>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="font-medium font-mono text-[#32070F] hover:text-[#7D1D2C] hover:underline transition-colors block"
+                  >
+                    {siteConfig.email}
+                  </a>
                 </div>
               </div>
 
@@ -151,20 +174,15 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            <div className="pt-2 border-t border-[#E8DFD3] text-xs text-[#7A6B68] flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Pan-India &amp; worldwide shipping available</span>
-            </div>
           </div>
 
           {/* Simple Enquiry Form (7 cols) */}
           <div className="md:col-span-7 bg-[#FAF7F2] p-6 sm:p-8 rounded-2xl border border-[#D8CEBE]">
             <h3 className="font-serif text-2xl font-bold text-[#32070F] mb-1">
-              Request a Quote
+              Send an Enquiry
             </h3>
             <p className="text-xs sm:text-sm text-[#665754] mb-6">
-              Fill out a quick note and we will reply promptly with details.
+              Share details about your upcoming celebration or gifting requirements.
             </p>
 
             {submitted ? (
@@ -195,7 +213,7 @@ export const ContactSection: React.FC = () => {
                       setFormData({
                         name: '',
                         phone: '',
-                        service: 'Event Decoration',
+                        service: 'Wedding Gifting & Décor',
                         message: '',
                       });
                     }}
@@ -243,29 +261,31 @@ export const ContactSection: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-semibold text-[#4A3E3D] mb-1">
-                    What are you looking for?
+                    What are you planning?
                   </label>
                   <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full px-3.5 py-2.5 text-sm bg-white rounded-md border border-[#D8CEBE] focus:outline-hidden focus:ring-1 focus:ring-[#7D1D2C] focus:border-[#7D1D2C]"
                   >
-                    <option value="Event Decoration">Event Decoration</option>
-                    <option value="Wedding & Party Decor">Wedding &amp; Party Decor</option>
-                    <option value="Customized Gifts">Customized Gifts</option>
-                    <option value="Corporate Gifting">Corporate Gifting</option>
-                    <option value="Personalized Gifts">Personalized Gifts</option>
-                    <option value="Other">Other Custom Request</option>
+                    <option value="Wedding Gifting & Décor">Wedding &amp; Bridal Gifting / Décor</option>
+                    <option value="Baby Shower & Newborn">Baby Shower &amp; Newborn Celebrations</option>
+                    <option value="Housewarming Celebration">Housewarming &amp; Home Gifting / Décor</option>
+                    <option value="Corporate Gifting & Event">Corporate Gifting &amp; Business Events</option>
+                    <option value="Personalized Gifts & Hampers">Personalized Gifts &amp; Curated Hampers</option>
+                    <option value="Combined Gifting & Décor Package">Combined Gifting &amp; Décor Package</option>
+                    <option value="Festive & Seasonal Celebration">Festive &amp; Seasonal Celebrations</option>
+                    <option value="Other Special Occasion">Other Special Occasion</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-[#4A3E3D] mb-1">
-                    Message
+                    Message / Ideas
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Tell us about your event date, theme, or custom gift idea..."
+                    placeholder="Tell us about your event date, theme, colors, or custom gifting requirement..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-3.5 py-2.5 text-sm bg-white rounded-md border border-[#D8CEBE] focus:outline-hidden focus:ring-1 focus:ring-[#7D1D2C] focus:border-[#7D1D2C]"
