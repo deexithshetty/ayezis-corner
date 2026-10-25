@@ -50,17 +50,17 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#4A0E18] text-[#FAF7F2] px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#0E0305] text-[#FAF7F2] px-6 py-4 flex items-center justify-between border-b border-[#DFBE7A]/20">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#DFBE7A]" />
-            <h3 className="font-serif text-xl font-bold">Enquire with Us</h3>
+            <h3 className="font-serif text-xl font-light tracking-wide text-[#DFBE7A]">Plan Your Event</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-white/80 hover:text-white rounded-md hover:bg-[#6B1724] transition-colors cursor-pointer"
+            className="p-1 text-white/80 hover:text-white rounded-md hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-[#DFBE7A]" />
           </button>
         </div>
 

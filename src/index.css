@@ -29,7 +29,7 @@ h1, h2, h3, .font-serif {
   font-family: var(--font-serif);
 }
 
-/* Custom scrollbar for gallery and smooth elements */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

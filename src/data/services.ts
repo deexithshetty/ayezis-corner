@@ -128,7 +128,7 @@ export const decorationElements = [
   'Theme-based props',
 ];
 
-// 3. Combined Gifting & Decor Packages
+// Combined Packages
 export interface CombinedPackage {
   title: string;
   description: string;
@@ -158,114 +158,103 @@ export const combinedPackages: CombinedPackage[] = [
   },
   {
     title: 'Housewarming Packages',
-    description: 'Auspicious home entrance decoration combined with traditional sweets, aromas, and home gifts.',
+    description: 'Entrance and living area auspicious styling coordinated with guest giveaway boxes.',
     iconName: 'Home',
   },
-  {
-    title: 'Corporate Gifting & Event Décor',
-    description: 'Corporate stage & photo corner setup aligned with customized executive employee and client gift hampers.',
-    iconName: 'Briefcase',
-  },
-  {
-    title: 'Festival Gifting & Decoration',
-    description: 'Festive pooja and venue decoration paired with premium traditional holiday hampers.',
-    iconName: 'Flame',
-  },
-  {
-    title: 'Fully Customized Celebration Packages',
-    description: 'A tailor-made combination of decor and gifts designed around your unique occasion, theme, and budget.',
-    iconName: 'Palette',
-  },
 ];
 
-// 4. Customization Features
-export const customizationPoints = [
-  {
-    title: 'Personalized Gift Selection',
-    description: 'Handpick items tailored specifically to the recipient’s taste and personality.',
-  },
-  {
-    title: 'Custom Hamper Curation',
-    description: 'Curate bespoke combinations of treats, keepsakes, textiles, and aromatic products.',
-  },
-  {
-    title: 'Theme & Colour Coordination',
-    description: 'Match gift wrappings, ribbons, florals, and backdrops to your exact event color palette.',
-  },
-  {
-    title: 'Customized Names, Messages & Tags',
-    description: 'Laser-engraved initials, embroidered monograms, custom gift tags, and printed note cards.',
-  },
-  {
-    title: 'Customized Backdrops & Signage',
-    description: 'Welcome boards, easel signage, acrylic neon plaques, and tailored backdrop banners.',
-  },
-  {
-    title: 'Budget-Based Packages',
-    description: 'Flexible packages designed thoughtfully to meet your desired budget without compromising beauty.',
-  },
-  {
-    title: 'Small & Large Celebrations',
-    description: 'Attentive service for cozy, intimate family gatherings as well as grand celebration venues.',
-  },
-  {
-    title: 'Bulk Gifting & Event Orders',
-    description: 'Reliable fulfillment for high-volume corporate giveaways and wedding return favor orders.',
-  },
-  {
-    title: 'Personalized Concepts for Special Occasions',
-    description: 'Creative styling and bespoke gifting designed exclusively for your unique milestone moments.',
-  },
-];
+// How It Works Steps
+export interface HowItWorksStep {
+  step: string;
+  title: string;
+  description: string;
+}
 
-// 5. How It Works (4 Steps)
-export const howItWorksSteps = [
+export const howItWorksSteps: HowItWorksStep[] = [
   {
     step: '01',
     title: 'Share Your Occasion',
-    description: 'Tell us what you are planning and what you have in mind.',
+    description: 'Tell us about your celebration, date, theme colors, or who the gift hamper is for.',
   },
   {
     step: '02',
-    title: 'Choose Your Style',
-    description: 'Select your gifts, décor, colours and budget.',
+    title: 'Curate the Experience',
+    description: 'Select from our tailored packages or let us customize items to match your target budget.',
   },
   {
     step: '03',
-    title: 'Customize Your Package',
-    description: 'We help coordinate a personalized gifting or decoration experience.',
+    title: 'Artisanal Personalization',
+    description: 'We personalize names, calligraphy tags, drape fabrics, and arrange ambient lighting.',
   },
   {
     step: '04',
-    title: 'Celebrate Your Moment',
-    description: 'Enjoy a thoughtfully planned celebration with Ayezis Corner.',
+    title: 'Setup & Handover',
+    description: 'Punctual on-site installation or doorstep gift hamper delivery across Udupi and beyond.',
   },
 ];
 
-// 6. Why Choose Ayezis Corner (6 Points)
-export const whyChoosePoints = [
+// Customization Points
+export interface CustomizationPoint {
+  title: string;
+  description: string;
+}
+
+export const customizationPoints: CustomizationPoint[] = [
   {
-    title: 'Gifts and décor under one roof',
-    description: 'Seamless coordination for both your celebration ambience and personalized gifts.',
+    title: 'Personalized Themes',
+    description: 'Every decor setup and hamper is tailored to your color palette and celebration mood.',
   },
   {
-    title: 'Personalized solutions for every occasion',
-    description: 'Every arrangement and gift box is tailored around your individual preferences.',
+    title: 'Flexible Budgeting',
+    description: 'Curated tiers to maximize aesthetic value at every budget level.',
   },
   {
-    title: 'Creative and coordinated themes',
-    description: 'Harmonious color palettes, matching aesthetics, and unique decorative ideas.',
+    title: 'Handcrafted Packaging',
+    description: 'Embossed names, laser cut plaques, satin ribbons, and bespoke wax seals.',
   },
   {
-    title: 'Options for different budgets',
-    description: 'Flexible packages and options curated to deliver maximum value at your chosen scale.',
+    title: 'Single & Bulk Orders',
+    description: 'From an intimate keepsake box to hundreds of wedding return favors.',
   },
   {
-    title: 'Attention to presentation and detail',
-    description: 'Meticulous finishing in every ribbon, floral placement, and customized tag.',
+    title: 'Coordinated Aesthetics',
+    description: 'Match your venue decor seamlessly with your welcome favors and bridal hampers.',
   },
   {
-    title: 'Personal and corporate celebration solutions',
-    description: 'Experienced in catering to intimate family celebrations and professional business events.',
+    title: 'Direct WhatsApp Support',
+    description: 'Prompt communication with photos and progress updates throughout the process.',
+  },
+];
+
+// Why Choose Points
+export interface WhyChoosePoint {
+  title: string;
+  description: string;
+}
+
+export const whyChoosePoints: WhyChoosePoint[] = [
+  {
+    title: 'Artisanal Craftsmanship',
+    description: 'Every gift is assembled by hand and every backdrop is personally curated with premium materials.',
+  },
+  {
+    title: 'Transparent Collaboration',
+    description: 'Clear communication with honest inclusions, avoiding last-minute surprises or hidden fees.',
+  },
+  {
+    title: 'Udupi & Coastal Focus',
+    description: 'Local presence with rapid delivery and punctual on-site celebration styling.',
+  },
+  {
+    title: 'Bespoke Customization',
+    description: 'Custom names, dates, colors, and items integrated into every setup or hamper.',
+  },
+  {
+    title: 'Coordinated Solutions',
+    description: 'Get both venue decor and guest hampers from a single cohesive design team.',
+  },
+  {
+    title: 'Prompt WhatsApp Consultations',
+    description: 'Instant assistance, photo references, and hassle-free booking on WhatsApp.',
   },
 ];

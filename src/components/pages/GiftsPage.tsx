@@ -1,5 +1,5 @@
 import React from 'react';
-import { Gift, MessageCircle, ArrowRight, Sparkles, Check, PackageCheck } from 'lucide-react';
+import { Gift, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';

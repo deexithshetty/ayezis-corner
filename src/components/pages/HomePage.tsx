@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MessageCircle, Gift, HeartHandshake } from 'lucid
 import { siteConfig, getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
+import { HeroCarousel } from '../HeroCarousel';
 
 interface HomePageProps {
   onNavigate: (route: PageRoute) => void;
@@ -11,188 +12,64 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal }) => {
   return (
-    <div className="space-y-0">
-      {/* 1. Full-Screen / Large Editorial Hero */}
-      <section className="relative min-h-[82vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#1E0509]">
-        {/* Full-bleed background photography */}
-        <div className="absolute inset-0 z-0">
-          <ResilientImage
-            src="/images/decorations/decorations-09.jpeg"
-            alt="Ayezis Corner Luxury Celebration Décor"
-            className="w-full h-full object-cover object-center opacity-45 scale-102 transition-transform duration-1000 ease-out"
-            fallbackTitle="Ayezis Corner Celebration Styling"
-          />
-          {/* Subtle multi-layer editorial gradient scrim */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A0307] via-[#1A0307]/50 to-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A0307]/70 via-transparent to-[#1A0307]/70" />
-        </div>
-
-        {/* Content container */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center text-white space-y-6 sm:space-y-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#DFBE7A] text-xs font-medium tracking-[0.25em] uppercase">
+    <div className="space-y-0 bg-[#0E0305]">
+      {/* 1. Hero Section with 3D Coverflow Showcase (Gowjee Events Visual Inspiration) */}
+      <section className="relative overflow-hidden bg-[#0E0305] pt-6 sm:pt-8 pb-10 sm:pb-14 border-b border-[#DFBE7A]/15">
+        {/* Editorial Headline & Subtitle */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-4 mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-[#DFBE7A]/30 text-[#DFBE7A] text-xs font-light tracking-[0.25em] uppercase">
             <Sparkles className="w-3.5 h-3.5 text-[#DFBE7A]" />
-            <span>Luxury Event Décor · Bespoke Gifting</span>
+            <span>Luxury Event Décor · Bespoke Gifting Studio</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-light tracking-tight leading-[1.08] text-[#FFFDF9] max-w-4xl mx-auto [text-wrap:balance]">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-[#FFFDF9] max-w-4xl mx-auto [text-wrap:balance] leading-[1.12]">
             Thoughtful Gifts.<br />
             <span className="font-normal italic text-[#DFBE7A]">Beautiful Celebrations.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-[#EAE0D2]/90 max-w-2xl mx-auto font-light leading-relaxed [text-wrap:pretty]">
-            An editorial studio based in Udupi, crafting bespoke ceremonial decorations, elegant stage styling, and thoughtfully personalized keepsake hampers.
+          <p className="text-sm sm:text-base text-[#EAE0D2]/80 max-w-2xl mx-auto font-light leading-relaxed">
+            An artisanal event styling studio based in Udupi, creating majestic ceremonial stages, intimate celebrations, and curated personalized gift hampers.
           </p>
-
-          {/* Clean Thin-line Action CTAs */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <button
-              onClick={() => onNavigate('decorations')}
-              className="w-full sm:w-auto px-7 py-3.5 text-xs sm:text-sm font-semibold text-[#1A0307] bg-[#FFFDF9] hover:bg-[#F3ECE2] active:scale-[0.98] transition-all rounded-full shadow-lg flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Explore Decorations</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={() => onNavigate('gifts')}
-              className="w-full sm:w-auto px-7 py-3.5 text-xs sm:text-sm font-semibold text-white bg-white/10 hover:bg-white/20 active:scale-[0.98] transition-all rounded-full border border-white/30 backdrop-blur-xs flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Explore Gifts</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] active:scale-[0.98] transition-all rounded-full shadow-md flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>Enquire on WhatsApp</span>
-            </a>
-          </div>
         </div>
 
-        {/* Subtle bottom scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-[11px] tracking-widest uppercase flex items-center gap-2 pointer-events-none">
-          <span className="w-6 h-px bg-white/30" />
-          <span>Curated Portfolio</span>
-          <span className="w-6 h-px bg-white/30" />
-        </div>
-      </section>
+        {/* 3D Coverflow Interactive Carousel */}
+        <HeroCarousel
+          onNavigate={onNavigate}
+          onOpenQuoteModal={onOpenQuoteModal}
+        />
 
-      {/* 2. Featured Work / Visual Portfolio Preview (Editorial Asymmetric Showcase) */}
-      <section className="py-20 sm:py-28 bg-[#FFFDF9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
-            <div className="space-y-2">
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#7D1D2C]">
-                Visual Portfolio Preview
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#32070F] tracking-tight">
-                Moments Crafted With Care
-              </h2>
-            </div>
-            <button
-              onClick={() => onNavigate('gallery')}
-              className="group text-xs sm:text-sm font-semibold text-[#7D1D2C] hover:text-[#4A0E18] flex items-center gap-2 self-start md:self-end pb-1 border-b border-[#7D1D2C]/30 hover:border-[#7D1D2C] transition-all cursor-pointer"
-            >
-              <span>View Full Gallery (60+ Works)</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
+        {/* Primary Exploration Actions */}
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto px-4">
+          <button
+            onClick={() => onNavigate('decorations')}
+            className="w-full sm:w-auto px-7 py-3 text-xs sm:text-sm font-semibold text-[#1A0307] bg-[#DFBE7A] hover:bg-[#C5A059] active:scale-[0.98] transition-all rounded-full shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Explore Decorations</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
 
-          {/* Asymmetric Gowjee-inspired Photo Bento */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-stretch">
-            {/* Primary Large Feature Photo */}
-            <div
-              onClick={() => onNavigate('decorations')}
-              className="md:col-span-7 group relative rounded-3xl overflow-hidden bg-[#EAE0D2] border border-[#D8CEBE]/80 shadow-sm hover:shadow-xl cursor-pointer transition-all duration-500"
-            >
-              <div className="relative aspect-4/3 sm:aspect-16/11 w-full overflow-hidden">
-                <ResilientImage
-                  src="/images/wedding.png"
-                  alt="Wedding & Pre-Wedding Ceremonies"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent p-6 sm:p-8 flex flex-col justify-end text-white">
-                  <span className="text-xs uppercase tracking-widest text-[#DFBE7A] font-medium">
-                    Ceremonial Styling
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-light mt-1">
-                    Wedding &amp; Pre-Wedding Décor
-                  </h3>
-                  <p className="text-xs sm:text-sm text-white/85 mt-1 max-w-md line-clamp-2">
-                    Regal stage settings, entrance floral arches, and ceremonial backdrops designed with authentic elegance.
-                  </p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-[#DFBE7A] font-semibold group-hover:underline">
-                    <span>Explore Stage Styling</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </div>
-            </div>
+          <button
+            onClick={() => onNavigate('gifts')}
+            className="w-full sm:w-auto px-7 py-3 text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-white/10 hover:bg-white/20 active:scale-[0.98] transition-all rounded-full border border-white/20 backdrop-blur-xs flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Explore Customized Gifts</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
 
-            {/* Right Side Stacked 2 Photos */}
-            <div className="md:col-span-5 flex flex-col gap-6 sm:gap-8">
-              {/* Photo 1: Customized Gifting */}
-              <div
-                onClick={() => onNavigate('gifts')}
-                className="flex-1 group relative rounded-3xl overflow-hidden bg-[#EAE0D2] border border-[#D8CEBE]/80 shadow-sm hover:shadow-xl cursor-pointer transition-all duration-500"
-              >
-                <div className="relative aspect-16/10 w-full h-full overflow-hidden">
-                  <ResilientImage
-                    src="/images/customized-gifts/customized-gifts-31.jpeg"
-                    alt="Customized Gifting & Keepsakes"
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent p-5 sm:p-6 flex flex-col justify-end text-white">
-                    <span className="text-xs uppercase tracking-widest text-[#DFBE7A] font-medium">
-                      Thoughtful Keepsakes
-                    </span>
-                    <h3 className="font-serif text-xl sm:text-2xl font-light mt-0.5">
-                      Personalized Gift Hampers
-                    </h3>
-                    <span className="mt-1.5 inline-flex items-center gap-1.5 text-xs text-[#DFBE7A] font-semibold group-hover:underline">
-                      <span>Discover Gifting</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Photo 2: Baby & Newborn Celebrations */}
-              <div
-                onClick={() => onNavigate('decorations')}
-                className="flex-1 group relative rounded-3xl overflow-hidden bg-[#EAE0D2] border border-[#D8CEBE]/80 shadow-sm hover:shadow-xl cursor-pointer transition-all duration-500"
-              >
-                <div className="relative aspect-16/10 w-full h-full overflow-hidden">
-                  <ResilientImage
-                    src="/images/baby-newborn/baby-newborn-02.jpeg"
-                    alt="Baby & Newborn Welcome"
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent p-5 sm:p-6 flex flex-col justify-end text-white">
-                    <span className="text-xs uppercase tracking-widest text-[#DFBE7A] font-medium">
-                      Cherished Beginnings
-                    </span>
-                    <h3 className="font-serif text-xl sm:text-2xl font-light mt-0.5">
-                      Baby Welcome &amp; Newborn Favors
-                    </h3>
-                    <span className="mt-1.5 inline-flex items-center gap-1.5 text-xs text-[#DFBE7A] font-semibold group-hover:underline">
-                      <span>View Collection</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a
+            href={getWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-7 py-3 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] active:scale-[0.98] transition-all rounded-full shadow-md flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>Enquire on WhatsApp</span>
+          </a>
         </div>
       </section>
 
-      {/* 3. Two Main Service Choices (Full-Width Split Experience) */}
-      <section className="py-16 sm:py-24 bg-[#FAF7F2] border-y border-[#E8DFD3]">
+      {/* 2. Two Main Service Choices (Full-Width Split Experience) */}
+      <section className="py-18 sm:py-24 bg-[#FAF7F2] text-[#241E1C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 space-y-2">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#7D1D2C]">
@@ -310,8 +187,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
       </section>
 
-      {/* 4. Short Ayezis Corner Introduction (Editorial Clean Layout featuring decorations-02.jpeg) */}
-      <section className="py-20 sm:py-28 bg-[#FFFDF9]">
+      {/* 3. Short Ayezis Corner Introduction (Editorial Clean Layout featuring decorations-02.jpeg) */}
+      <section className="py-20 sm:py-28 bg-[#FFFDF9] text-[#241E1C] border-t border-[#E8DFD3]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Visual with the designated decorations-02.jpeg image */}
@@ -368,8 +245,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
       </section>
 
-      {/* 5. Selected Works Filmstrip / Visual Strip */}
-      <section className="py-14 sm:py-20 bg-[#FAF7F2] border-t border-[#E8DFD3] overflow-hidden">
+      {/* 4. Selected Works Filmstrip / Visual Strip */}
+      <section className="py-14 sm:py-20 bg-[#FAF7F2] text-[#241E1C] border-t border-[#E8DFD3] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -424,10 +301,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
       </section>
 
-      {/* 6. Final WhatsApp Enquiry CTA Section */}
-      <section className="py-20 sm:py-28 bg-[#32070F] text-[#FAF7F2] relative overflow-hidden">
+      {/* 5. Final WhatsApp Enquiry CTA Section */}
+      <section className="py-20 sm:py-28 bg-[#0E0305] text-[#FAF7F2] relative overflow-hidden border-t border-[#DFBE7A]/15">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#DFBE7A] text-xs font-medium tracking-[0.2em] uppercase border border-white/15">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 text-[#DFBE7A] text-xs font-medium tracking-[0.2em] uppercase border border-[#DFBE7A]/25">
             <Sparkles className="w-3.5 h-3.5 text-[#DFBE7A]" />
             <span>Consultation &amp; Bookings</span>
           </div>
@@ -453,9 +330,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
             <button
               onClick={onOpenQuoteModal}
-              className="w-full sm:w-auto px-8 py-4 text-sm font-semibold text-[#FAF7F2] bg-white/10 hover:bg-white/20 active:scale-[0.98] rounded-full border border-white/20 backdrop-blur-xs transition-all cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 text-sm font-semibold text-[#1A0307] bg-[#DFBE7A] hover:bg-[#C5A059] active:scale-[0.98] rounded-full transition-all cursor-pointer shadow-md"
             >
-              <span>Request Quote</span>
+              <span>Plan Your Event</span>
             </button>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Mail, MapPin, Sparkles, Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MessageCircle, Phone, Mail, MapPin, Sparkles, Send, CheckCircle2 } from 'lucide-react';
 import { siteConfig, getWhatsAppLink } from '../../config/siteConfig';
 import { PageRoute } from '../../types/navigation';
 
@@ -23,7 +23,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuot
     e.preventDefault();
     if (!formData.name.trim() || !formData.phone.trim()) return;
 
-    // Generate WhatsApp URL with prefilled text and open it
     const msg = `Hi Ayezis Corner, I'm submitting an enquiry via your website:\nName: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.service}\nOccasion: ${formData.occasion}\nEvent Date: ${formData.date || 'TBD'}\nDetails: ${formData.message || 'None'}`;
     window.open(getWhatsAppLink(msg), '_blank');
     setSubmitted(true);

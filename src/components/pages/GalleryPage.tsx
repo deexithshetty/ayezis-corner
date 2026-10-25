@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight, MessageCircle, Maximize2, Sparkles, ArrowRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, MessageCircle, Maximize2, Sparkles } from 'lucide-react';
 import { galleryItems, galleryCategories, GalleryCategory, GalleryItem } from '../../data/gallery';
 import { getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
