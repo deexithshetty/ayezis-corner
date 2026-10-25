@@ -3,69 +3,121 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { AboutSection } from './components/AboutSection';
-import { GiftingSection } from './components/GiftingSection';
-import { DecorationSection } from './components/DecorationSection';
-import { PackagesSection } from './components/PackagesSection';
-import { HowItWorksSection } from './components/HowItWorksSection';
-import { GallerySection } from './components/GallerySection';
-import { WhyChooseUsSection } from './components/WhyChooseUsSection';
-import { InstagramSection } from './components/InstagramSection';
-import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { QuickQuoteModal } from './components/QuickQuoteModal';
+import { PageRoute } from './types/navigation';
+import { HomePage } from './components/pages/HomePage';
+import { DecorationsPage } from './components/pages/DecorationsPage';
+import { GiftsPage } from './components/pages/GiftsPage';
+import { GalleryPage } from './components/pages/GalleryPage';
+import { AboutPage } from './components/pages/AboutPage';
+import { ContactPage } from './components/pages/ContactPage';
+
+const validRoutes: PageRoute[] = ['home', 'decorations', 'gifts', 'gallery', 'about', 'contact'];
+
+function parseHashRoute(): PageRoute {
+  const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+  if (validRoutes.includes(hash as PageRoute)) {
+    return hash as PageRoute;
+  }
+  return 'home';
+}
 
 export default function App() {
+  const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => parseHashRoute());
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
+  // Sync route with browser hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const nextRoute = parseHashRoute();
+      setCurrentRoute(nextRoute);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
+  }, []);
+
+  const navigateTo = (route: PageRoute) => {
+    if (currentRoute !== route) {
+      window.location.hash = route;
+      setCurrentRoute(route);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#241E1C] flex flex-col font-sans selection:bg-[#7D1D2C]/15 selection:text-[#7D1D2C]">
-      {/* 1. Clean Sticky Navbar */}
-      <Navbar onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
+      {/* 1. Clean Sticky Minimal Navbar */}
+      <Navbar
+        currentRoute={currentRoute}
+        onNavigate={navigateTo}
+        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+      />
 
+      {/* 2. Active Page Content */}
       <main className="flex-1">
-        {/* 2. Hero Section - Visually impressive image focus */}
-        <Hero onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />
+        {currentRoute === 'home' && (
+          <HomePage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
 
-        {/* 3. About Section - Client business positioning */}
-        <AboutSection />
+        {currentRoute === 'decorations' && (
+          <DecorationsPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
 
-        {/* 4. Gifting Services - 9 Client curated categories */}
-        <GiftingSection />
+        {currentRoute === 'gifts' && (
+          <GiftsPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
 
-        {/* 5. Decoration Services - 7 Occasions & 8 Décor Elements */}
-        <DecorationSection />
+        {currentRoute === 'gallery' && (
+          <GalleryPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
 
-        {/* 6. Combined Packages & Customization Features */}
-        <PackagesSection />
+        {currentRoute === 'about' && (
+          <AboutPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
 
-        {/* 7. How It Works - 4 Step seamless experience */}
-        <HowItWorksSection />
-
-        {/* 8. Featured Work / Gallery - Editorial portfolio */}
-        <GallerySection />
-
-        {/* 9. Why Choose Ayezis Corner */}
-        <WhyChooseUsSection />
-
-        {/* 10. Instagram Section - @ayezis_corner preview */}
-        <InstagramSection />
-
-        {/* 11. Final Contact / Enquiry Section */}
-        <ContactSection />
+        {currentRoute === 'contact' && (
+          <ContactPage
+            onNavigate={navigateTo}
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        )}
       </main>
 
-      {/* 12. Footer */}
-      <Footer />
+      {/* 3. Minimal Editorial Footer */}
+      <Footer onNavigate={navigateTo} />
 
-      {/* 13. Floating WhatsApp button */}
+      {/* 4. Floating WhatsApp Action */}
       <WhatsAppFloatingButton />
 
-      {/* 14. Quick Enquiry Modal */}
+      {/* 5. Quick Consultation Modal */}
       <QuickQuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
