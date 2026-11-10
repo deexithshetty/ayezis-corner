@@ -22,12 +22,12 @@ export const siteConfig = {
     "From thoughtfully curated gifts and personalized hampers to beautiful decorations, we design memorable experiences for your special celebrations with creativity and elegance.",
 
   // Contact Information (Temporary testing details)
-  phone: "9632494070",
-  whatsappNumber: "919632494070", // Digits only with country code
-  whatsappDisplay: "+91 9632494070",
-  email: "deexith555@gmail.com",
-  address: "Udupi, Karnataka",
-  googleMapsUrl: "",
+phone: "919148123660",
+whatsappNumber: "919148123660", // Digits only with country code
+whatsappDisplay: "+91 9148123660",
+email: "ayezis@gmail.com",
+address: "Shop No. 4-293A1, Sri Gurudeva Complex, Laxmindra Nagar, Kunjibettu, Udupi, Karnataka - 576102",
+googleMapsUrl: "https://maps.app.goo.gl/k8stdF2JAEjxT4oBA",
 
   // Social Links
   instagramUrl: "https://www.instagram.com/ayezis_corner/",
