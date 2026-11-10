@@ -1,74 +1,63 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, MessageCircle, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ResilientImage } from './ResilientImage';
-import { getWhatsAppLink } from '../config/siteConfig';
 import { PageRoute } from '../types/navigation';
+
+import weddingDecorImg from '../assets/images/carousel_wedding_decor_1794293626409.jpg';
+import babyCelebrationsImg from '../assets/images/carousel_baby_celebrations_1794293628022.jpg';
+import eidRamadanImg from '../assets/images/carousel_eid_ramadan_1794293628301.jpg';
+import corporateEventsImg from '../assets/images/carousel_corporate_events_1794293631668.jpg';
+import stageTableImg from '../assets/images/carousel_stage_table_1794293630931.jpg';
+import dessertTablesImg from '../assets/images/carousel_dessert_tables_1794293632446.jpg';
+import outdoorBeachImg from '../assets/images/carousel_outdoor_beach_1794293633830.jpg';
+import homeEventsImg from '../assets/images/carousel_home_events_1794293633355.jpg';
 
 export interface CarouselSlide {
   id: string;
-  title: string;
-  subtitle: string;
-  category: string;
+  alt: string;
   image: string;
-  route: PageRoute;
 }
 
 const slides: CarouselSlide[] = [
   {
     id: 'slide-1',
-    title: 'Ceremonial Stage Styling',
-    subtitle: 'Grand Celebration Arch & Chandelier',
-    category: 'Event Decorations',
-    image: '/images/decorations/decorations-09.jpeg',
-    route: 'decorations',
+    alt: 'Wedding Decorations – Ayezis Corner',
+    image: weddingDecorImg,
   },
   {
     id: 'slide-2',
-    title: 'Wedding & Pre-Wedding Décor',
-    subtitle: 'Regal Backdrops & Floral Artistry',
-    category: 'Wedding Styling',
-    image: '/images/wedding.png',
-    route: 'decorations',
+    alt: 'Baby Celebrations – Ayezis Corner',
+    image: babyCelebrationsImg,
   },
   {
     id: 'slide-3',
-    title: 'Bespoke Keepsake Hampers',
-    subtitle: 'Personalized Executive Gift Boxes',
-    category: 'Customized Gifts',
-    image: '/images/customized-gifts/customized-gifts-31.jpeg',
-    route: 'gifts',
+    alt: 'Eid & Ramadan – Ayezis Corner',
+    image: eidRamadanImg,
   },
   {
     id: 'slide-4',
-    title: 'Bridal Veil & Walkway Styling',
-    subtitle: 'Crimson Embroidered Ceremonial Walkway',
-    category: 'Bridal Moments',
-    image: '/images/wedding-bridal/wedding-bridal-02.jpeg',
-    route: 'decorations',
+    alt: 'Corporate Events – Ayezis Corner',
+    image: corporateEventsImg,
   },
   {
     id: 'slide-5',
-    title: 'Baby Welcome & Cradle Styling',
-    subtitle: 'Joyous Floral Installations & Trunks',
-    category: 'Baby & Newborn',
-    image: '/images/baby-newborn/baby-newborn-02.jpeg',
-    route: 'decorations',
+    alt: 'Stage & Table Decor – Ayezis Corner',
+    image: stageTableImg,
   },
   {
     id: 'slide-6',
-    title: 'Auspicious Home Ceremonies',
-    subtitle: 'Housewarming Entrance & Canopy Décor',
-    category: 'Housewarming Décor',
-    image: '/images/decorations/decorations-06.jpeg',
-    route: 'decorations',
+    alt: 'Dessert & Gift Tables – Ayezis Corner',
+    image: dessertTablesImg,
   },
   {
     id: 'slide-7',
-    title: 'Intimate Celebration Styling',
-    subtitle: 'Ambient Lighting & Custom Backdrops',
-    category: 'Special Occasions',
-    image: '/images/decorations/decorations-02.jpeg',
-    route: 'decorations',
+    alt: 'Outdoor & Beach Events – Ayezis Corner',
+    image: outdoorBeachImg,
+  },
+  {
+    id: 'slide-8',
+    alt: 'Home & Special Events – Ayezis Corner',
+    image: homeEventsImg,
   },
 ];
 
@@ -77,7 +66,7 @@ interface HeroCarouselProps {
   onOpenQuoteModal: () => void;
 }
 
-export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onOpenQuoteModal }) => {
+export const HeroCarousel: React.FC<HeroCarouselProps> = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -332,71 +321,19 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onOpenQu
                 {/* Background Image */}
                 <ResilientImage
                   src={slide.image}
-                  alt={slide.title}
+                  alt={slide.alt}
                   className="w-full h-full object-cover"
                 />
 
-                {/* Dark Vignette / Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
+                {/* Subtle Bottom Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                {/* Active Card Details Overlay */}
-                {isActive ? (
-                  <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-between text-white">
-                    {/* Top Tag */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#DFBE7A] font-semibold bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-xs border border-[#DFBE7A]/30">
-                        {slide.category}
-                      </span>
-                    </div>
-
-                    {/* Bottom Title & Action */}
-                    <div className="space-y-2">
-                      <div>
-                        <h3 className="font-serif text-lg sm:text-2xl font-light text-white tracking-tight leading-snug">
-                          {slide.title}
-                        </h3>
-                        <p className="text-xs text-[#EAE0D2]/80 mt-0.5 line-clamp-1">
-                          {slide.subtitle}
-                        </p>
-                      </div>
-
-                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-white/15">
-                        <span className="font-serif text-[11px] sm:text-xs uppercase tracking-wider text-[#DFBE7A] font-semibold">
-                          AYEZIS CORNER
-                        </span>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onNavigate(slide.route);
-                            }}
-                            className="px-3 py-1.5 text-[11px] font-semibold rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-xs transition-colors flex items-center gap-1 cursor-pointer"
-                          >
-                            <span>Explore</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                          <a
-                            href={getWhatsAppLink(`Hi Ayezis Corner, I'm enquiring about your ${slide.title} service shown on the hero showcase.`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="p-1.5 rounded-full bg-[#25D366] hover:bg-[#20BA5A] text-white transition-colors cursor-pointer shadow-xs"
-                            title="Enquire on WhatsApp"
-                          >
-                            <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="absolute bottom-4 left-4 right-4 text-center">
-                    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#DFBE7A]/80 font-medium">
-                      AYEZIS CORNER
-                    </span>
-                  </div>
-                )}
+                {/* Only "Ayezis Corner" below each image */}
+                <div className="absolute bottom-5 left-4 right-4 text-center">
+                  <span className="font-serif text-xs sm:text-sm tracking-[0.2em] text-[#DFBE7A] font-medium">
+                    Ayezis Corner
+                  </span>
+                </div>
               </div>
             );
           })}

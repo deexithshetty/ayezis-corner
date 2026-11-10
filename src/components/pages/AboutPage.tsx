@@ -90,6 +90,59 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenQuoteMod
         </div>
       </section>
 
+      {/* Founder Introduction Section: The heart behind the brand */}
+      <section className="py-16 sm:py-24 bg-[#FFFDF9] border-t border-[#E8DFD3]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-[#FAF7F2] border border-[#D8CEBE] p-8 sm:p-12 lg:p-16 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              {/* Left Column: Elegant "M" Monogram, Heading & Founder Name */}
+              <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+                {/* Simple Elegant "M" Monogram */}
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#FFFDF9] border border-[#C5A059]/60 shadow-inner flex items-center justify-center relative">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-[#E8DFD3] flex items-center justify-center">
+                    <span className="font-serif text-4xl sm:text-5xl font-light text-[#7D1D2C] tracking-wide select-none">
+                      M
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#32070F] tracking-tight leading-[1.15]">
+                    The heart behind the brand
+                  </h2>
+
+                  <div className="space-y-1 pt-1">
+                    <p className="text-base sm:text-lg font-semibold text-[#32070F]">
+                      Meet the founder,
+                    </p>
+                    <p className="font-serif text-3xl sm:text-4xl italic text-[#7D1D2C]">
+                      Maliha.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-16 h-px bg-[#C5A059]" />
+              </div>
+
+              {/* Right Column: Exact Founder Narrative */}
+              <div className="lg:col-span-7 space-y-5 text-base sm:text-lg text-[#554643] font-light leading-relaxed lg:border-l lg:border-[#E8DFD3] lg:pl-12">
+                <p>
+                  Ayezis Corner is more than a business to me — it’s a creative journey that began in November 2020. As a woman entrepreneur, freelancer, daughter, wife and mom, I’ve built this space around something I truly love: helping people express their feelings through thoughtful gifts and meaningful celebrations.
+                </p>
+
+                <p>
+                  I believe the best gifts aren’t simply things; they carry a story. Whether you arrive with a clear idea or just a little inspiration, I love helping you explore options that fit your budget, expectations and timeline — so the final result feels personal to you.
+                </p>
+
+                <p className="text-[#32070F] font-normal">
+                  From customised gifts delivered across borders to event decorations around Udupi, Manipal and Mangalore, every enquiry is an opportunity to create something memorable. Thank you for being part of the Ayezis Corner story.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. The Three Pillars of Distinction */}
       <section className="py-16 sm:py-24 bg-[#FFFDF9] border-y border-[#E8DFD3]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

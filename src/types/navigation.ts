@@ -1,1 +1,1 @@
-export type PageRoute = 'home' | 'decorations' | 'gifts' | 'gallery' | 'about' | 'contact';
+export type PageRoute = 'home' | 'services' | 'decorations' | 'gifts' | 'gallery' | 'about' | 'contact';

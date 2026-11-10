@@ -10,13 +10,11 @@ import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { QuickQuoteModal } from './components/QuickQuoteModal';
 import { PageRoute } from './types/navigation';
 import { HomePage } from './components/pages/HomePage';
-import { DecorationsPage } from './components/pages/DecorationsPage';
-import { GiftsPage } from './components/pages/GiftsPage';
 import { GalleryPage } from './components/pages/GalleryPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
 
-const validRoutes: PageRoute[] = ['home', 'decorations', 'gifts', 'gallery', 'about', 'contact'];
+const validRoutes: PageRoute[] = ['home', 'services', 'decorations', 'gifts', 'gallery', 'about', 'contact'];
 
 function parseHashRoute(): PageRoute {
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
@@ -30,31 +28,80 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => parseHashRoute());
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
-  // Sync route with browser hash changes
+  const scrollToSection = (route: PageRoute) => {
+    if (route === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    let element = document.getElementById(route);
+    if (!element && (route === 'decorations' || route === 'gifts')) {
+      const servicesEl = document.getElementById('services');
+      const galleryEl = document.getElementById('gallery');
+      if (servicesEl && window.scrollY < servicesEl.offsetTop - 120) {
+        element = servicesEl;
+      } else {
+        element = galleryEl || servicesEl;
+      }
+    }
+    if (element) {
+      const navbarHeight = 80;
+      const top = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  };
+
+  // Scroll to initial hash on mount and handle browser back/forward hash changes
   useEffect(() => {
+    const initialRoute = parseHashRoute();
+    if (initialRoute !== 'home') {
+      requestAnimationFrame(() => {
+        scrollToSection(initialRoute);
+      });
+    }
+
     const handleHashChange = () => {
       const nextRoute = parseHashRoute();
       setCurrentRoute(nextRoute);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToSection(nextRoute);
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    window.addEventListener('popstate', handleHashChange);
-
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
-      window.removeEventListener('popstate', handleHashChange);
     };
   }, []);
 
+  // Update active navigation link based on currently visible section while scrolling
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      const scrollPosition = window.scrollY + 180;
+
+      if (window.scrollY < 120) {
+        setCurrentRoute('home');
+        return;
+      }
+
+      let activeSection: PageRoute = 'home';
+      for (const route of validRoutes) {
+        const el = document.getElementById(route);
+        if (el) {
+          const offsetTop = el.offsetTop;
+          if (scrollPosition >= offsetTop) {
+            activeSection = route;
+          }
+        }
+      }
+      setCurrentRoute(activeSection);
+    };
+
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+  }, []);
+
   const navigateTo = (route: PageRoute) => {
-    if (currentRoute !== route) {
-      window.location.hash = route;
-      setCurrentRoute(route);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    setCurrentRoute(route);
+    window.history.replaceState(null, '', route === 'home' ? window.location.pathname : `#${route}`);
+    scrollToSection(route);
   };
 
   return (
@@ -66,49 +113,35 @@ export default function App() {
         onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
       />
 
-      {/* 2. Active Page Content */}
+      {/* 2. Single-Page Scrolling Sections */}
       <main className="flex-1">
-        {currentRoute === 'home' && (
+        <div id="home" className="scroll-mt-20">
           <HomePage
             onNavigate={navigateTo}
             onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
           />
-        )}
+        </div>
 
-        {currentRoute === 'decorations' && (
-          <DecorationsPage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        )}
-
-        {currentRoute === 'gifts' && (
-          <GiftsPage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        )}
-
-        {currentRoute === 'gallery' && (
+        <div id="gallery" className="scroll-mt-20 border-t border-[#E8DFD3]">
           <GalleryPage
             onNavigate={navigateTo}
             onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
           />
-        )}
+        </div>
 
-        {currentRoute === 'about' && (
+        <div id="about" className="scroll-mt-20 border-t border-[#E8DFD3]">
           <AboutPage
             onNavigate={navigateTo}
             onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
           />
-        )}
+        </div>
 
-        {currentRoute === 'contact' && (
+        <div id="contact" className="scroll-mt-20 border-t border-[#E8DFD3]">
           <ContactPage
             onNavigate={navigateTo}
             onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
           />
-        )}
+        </div>
       </main>
 
       {/* 3. Minimal Editorial Footer */}

@@ -23,6 +23,7 @@ html {
   background-color: #FAF7F2;
   color: #241E1C;
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 h1, h2, h3, .font-serif {

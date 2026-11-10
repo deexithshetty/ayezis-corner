@@ -24,12 +24,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
 
   const navItems: { label: string; route: PageRoute }[] = [
     { label: 'Home', route: 'home' },
-    { label: 'Decorations', route: 'decorations' },
-    { label: 'Gifts', route: 'gifts' },
+    { label: 'Services', route: 'services' },
     { label: 'Gallery', route: 'gallery' },
     { label: 'About', route: 'about' },
     { label: 'Contact', route: 'contact' },
   ];
+
+  const isNavActive = (itemRoute: PageRoute) => {
+    if (itemRoute === 'services') {
+      return currentRoute === 'services' || currentRoute === 'decorations' || currentRoute === 'gifts';
+    }
+    return currentRoute === itemRoute;
+  };
 
   const handleNavClick = (route: PageRoute) => {
     onNavigate(route);
@@ -72,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
           {/* Desktop Navigation - Minimal & Elegant in Center */}
           <nav className="hidden lg:flex items-center gap-8 text-xs sm:text-sm font-light tracking-wider">
             {navItems.map((item) => {
-              const isActive = currentRoute === item.route;
+              const isActive = isNavActive(item.route);
               return (
                 <button
                   key={item.route}
@@ -150,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
           {/* Nav Links */}
           <nav className="flex flex-col gap-6 py-8">
             {navItems.map((item) => {
-              const isActive = currentRoute === item.route;
+              const isActive = isNavActive(item.route);
               return (
                 <button
                   key={item.route}
