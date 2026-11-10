@@ -302,12 +302,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                { title: 'Ceremonial Stage', img: '/images/decorations/decorations-09.jpeg', cat: 'Decor' },
-                { title: 'Bridal Veil & Styling', img: '/images/wedding-bridal/wedding-bridal-02.jpeg', cat: 'Wedding' },
-                { title: 'Custom Travel Box', img: '/images/customized-gifts/customized-gifts-31.jpeg', cat: 'Gifts' },
-                { title: 'Baby Welcome Setup', img: '/images/baby-newborn/baby-newborn-02.jpeg', cat: 'Baby' },
-              ].map((item, idx) => (
+      {[
+  { title: 'Floral Bedroom Decoration', img: '/images/decorations/new-wedding-floral-stage.jpeg', cat: 'Decor' },
+  { title: 'Chocolate Gift Tower', img: '/images/hampers/new-decorated-gift-hamper.jpeg', cat: 'Hampers' },
+  { title: 'Personalized Kids Gift Set', img: '/images/baby-newborn/baby-newborn-02.jpeg', cat: 'Baby' },
+  { title: 'Festive Gift Hampers', img: '/images/hampers/hampers-01.jpeg', cat: 'Hampers' },
+      ].map((item, idx) => (
                 <div
                   key={idx}
                   onClick={() => onNavigate('gallery')}
