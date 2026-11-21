@@ -201,7 +201,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'wedding-06',
     title: 'Custom Gold Mirror Name Favors',
-    category: 'Wedding & Bridal',
+    category: 'Customized Gifts',
     image: '/images/wedding-bridal/wedding-bridal-06.jpeg',
     caption: 'Personalized gold metal cursive name keychains crafted as elegant celebration return favors.',
     size: 'standard',
@@ -385,7 +385,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'wedding-01',
     title: 'Ceremonial Family Gift Presentation',
-    category: 'Wedding & Bridal',
+    category: 'Customized Gifts',
     image: '/images/wedding-bridal/wedding-bridal-01.jpeg',
     caption: 'Handcrafted gift hamper presentation for a special family celebration ceremony.',
     size: 'standard',
@@ -393,7 +393,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'wedding-08',
     title: 'Personalized Professional Keepsake Desk Set',
-    category: 'Wedding & Bridal',
+    category: 'Customized Gifts',
     image: '/images/wedding-bridal/wedding-bridal-08.jpeg',
     caption: 'Custom desk organizer set featuring an engraved clock plaque, coat pen holder, personalized diary, and pen.',
     size: 'standard',
@@ -507,25 +507,25 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'new-new-personalized-neon-name-sign',
     title: 'Personalized Neon Name Sign',
-    category: 'Decorations',
+    category: 'Customized Gifts',
     image: '/images/decorations/new-personalized-neon-name-sign.jpeg',
-    caption: 'Personalized Neon Name Sign from the Ayezis Corner decorations collection.',
+    caption: 'Personalized Neon Name Sign from the Ayezis Corner customized gifts collection.',
     size: 'standard',
   },
   {
     id: 'new-new-neon-name-backdrop',
     title: 'Neon Name Backdrop',
-    category: 'Decorations',
+    category: 'Customized Gifts',
     image: '/images/decorations/new-neon-name-backdrop.jpeg',
-    caption: 'Neon Name Backdrop from the Ayezis Corner decorations collection.',
+    caption: 'Neon Name Backdrop from the Ayezis Corner customized gifts collection.',
     size: 'standard',
   },
   {
     id: 'new-new-neon-name-sign',
     title: 'Neon Name Sign',
-    category: 'Decorations',
+    category: 'Customized Gifts',
     image: '/images/decorations/new-neon-name-sign.jpeg',
-    caption: 'Neon Name Sign from the Ayezis Corner decorations collection.',
+    caption: 'Neon Name Sign from the Ayezis Corner customized gifts collection.',
     size: 'standard',
   },
   {
@@ -626,18 +626,18 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'new-new-wedding-gift-trays',
-    title: 'Wedding Gift Trays',
-    category: 'Wedding & Bridal',
+    title: 'Decorated Gift Hamper Trays',
+    category: 'Hampers',
     image: '/images/wedding-bridal/new-wedding-gift-trays.jpeg',
-    caption: 'Wedding Gift Trays from the Ayezis Corner wedding & bridal collection.',
+    caption: 'Curated chocolate, dry-fruit, and trousseau gift hamper trays styled in blush tulle and fresh florals from the Ayezis Corner hampers collection.',
     size: 'standard',
   },
   {
     id: 'new-new-baby-gift-hamper',
-    title: 'Baby Gift Hamper',
-    category: 'Baby & Newborn',
+    title: 'Blush Floral Chocolate & Candle Gift Hamper',
+    category: 'Hampers',
     image: '/images/baby-newborn/new-baby-gift-hamper.jpeg',
-    caption: 'Baby Gift Hamper from the Ayezis Corner baby & newborn collection.',
+    caption: 'Curated blush tulle gift hamper basket featuring Ferrero Rocher chocolates, scented candle, sweet treats jar, and floral satin bow from the Ayezis Corner hampers collection.',
     size: 'standard',
   },
   {
@@ -651,9 +651,9 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'new-new-neon-letter-decoration',
     title: 'Neon Letter Decoration',
-    category: 'Decorations',
+    category: 'Customized Gifts',
     image: '/images/decorations/new-neon-letter-decoration.jpeg',
-    caption: 'Neon Letter Decoration from the Ayezis Corner decorations collection.',
+    caption: 'Neon Letter Decoration from the Ayezis Corner customized gifts collection.',
     size: 'standard',
   },
   {
@@ -697,14 +697,6 @@ export const galleryItems: GalleryItem[] = [
     size: 'standard',
   },
   {
-    id: 'new-new-newborn-gift-catalogue',
-    title: 'Newborn Gift Catalogue',
-    category: 'Baby & Newborn',
-    image: '/images/baby-newborn/new-newborn-gift-catalogue.jpeg',
-    caption: 'Newborn Gift Catalogue from the Ayezis Corner baby & newborn collection.',
-    size: 'standard',
-  },
-  {
     id: 'new-new-baby-photo-collage-frame',
     title: 'Baby Photo Collage Frame',
     category: 'Baby & Newborn',
@@ -722,10 +714,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'new-new-baby-welcome-plaque',
-    title: 'Baby Welcome Plaque',
-    category: 'Baby & Newborn',
+    title: 'Personalized Floral Nikah Keepsake Plaque',
+    category: 'Wedding & Bridal',
     image: '/images/baby-newborn/new-baby-welcome-plaque.jpeg',
-    caption: 'Baby Welcome Plaque from the Ayezis Corner baby & newborn collection.',
+    caption: 'Custom circular mirror plaque with couple names, wedding date, gold braided trim, and floral accent from the Ayezis Corner wedding & bridal collection.',
     size: 'standard',
   },
   {
@@ -794,10 +786,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'new-new-corporate-display-wall',
-    title: 'Corporate Display Wall',
-    category: 'Corporate',
+    title: 'Beachside Fairy Light Photo Frame Setup',
+    category: 'Decorations',
     image: '/images/corporate/new-corporate-display-wall.jpeg',
-    caption: 'Corporate Display Wall from the Ayezis Corner corporate collection.',
+    caption: 'Outdoor evening photo display frame styled with warm fairy lights and fresh rose floral urns from the Ayezis Corner decorations collection.',
     size: 'standard',
   },
   {
@@ -826,10 +818,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'new-new-customized-team-tshirts',
-    title: 'Customized Team Tshirts',
-    category: 'Corporate',
+    title: 'Personalized Bride & Mother of the Bride Robes',
+    category: 'Wedding & Bridal',
     image: '/images/corporate/new-customized-team-tshirts.jpeg',
-    caption: 'Customized Team Tshirts from the Ayezis Corner corporate collection.',
+    caption: 'Custom embroidered satin bridal robes for the Bride and Mother of the Bride from the Ayezis Corner wedding & bridal collection.',
     size: 'standard',
   },
   {
