@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Gift, HeartHandshake } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 import { ResilientImage } from './ResilientImage';
+import aboutBeachDecorImg from '../assets/images/about_beach_decor_1795250340690.jpg';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -12,8 +13,8 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-[#D8CEBE] aspect-4/3 sm:aspect-5/4 bg-[#EAE0D2]">
               <ResilientImage
-                src="/images/decorations/decorations-02.jpeg"
-                alt="Ayezis Corner Celebration Styling"
+                src={aboutBeachDecorImg}
+                alt="Beachside event decoration with floral arch, warm fairy lights, flowers, and gold lanterns by Ayezis Corner"
                 className="w-full h-full object-cover"
                 fallbackTitle="Ayezis Corner Story"
               />

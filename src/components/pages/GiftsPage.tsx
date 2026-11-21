@@ -1,8 +1,9 @@
 import React from 'react';
-import { Gift, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { Gift, MessageCircle, Sparkles, ShoppingBag, Check } from 'lucide-react';
 import { getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
+import { useCart } from '../../context/CartContext';
 
 interface GiftsPageProps {
   onNavigate: (route: PageRoute) => void;
@@ -102,6 +103,7 @@ const giftCollections: GiftCollectionItem[] = [
 ];
 
 export const GiftsPage: React.FC<GiftsPageProps> = ({ onNavigate, onOpenQuoteModal }) => {
+  const { addItem, getItemQuantity, openCart } = useCart();
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       {/* 1. Large Visual Hero Banner */}
@@ -224,22 +226,49 @@ export const GiftsPage: React.FC<GiftsPageProps> = ({ onNavigate, onOpenQuoteMod
                       </div>
                     </div>
 
-                    <div className="pt-4 border-t border-[#F0E6D8] flex items-center justify-between">
+                    <div className="pt-4 border-t border-[#F0E6D8] flex flex-wrap items-center justify-between gap-2">
+                      {(() => {
+                        const qty = getItemQuantity(col.id);
+                        return (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              qty > 0
+                                ? openCart()
+                                : addItem({
+                                    id: col.id,
+                                    name: col.title,
+                                    image: col.image,
+                                    category: 'Customized Gifts',
+                                    priceLabel: 'Price on Request',
+                                  })
+                            }
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#7D1D2C] hover:bg-[#5F1420] text-[#FAF7F2] text-xs font-semibold transition-colors cursor-pointer"
+                          >
+                            {qty > 0 ? (
+                              <>
+                                <Check className="w-3.5 h-3.5 text-[#DFBE7A]" />
+                                <span>In Cart ({qty})</span>
+                              </>
+                            ) : (
+                              <>
+                                <ShoppingBag className="w-3.5 h-3.5 text-[#DFBE7A]" />
+                                <span>Add to Cart</span>
+                              </>
+                            )}
+                          </button>
+                        );
+                      })()}
+
                       <a
                         href={getWhatsAppLink(`Hi Ayezis Corner, I'm interested in ordering/customizing: ${col.title}`)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1E7E34] hover:text-[#176529] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E7E34] hover:text-[#176529] transition-colors"
                       >
                         <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
-                        <span>Customize on WhatsApp</span>
+                        <span>WhatsApp</span>
                       </a>
-                      <button
-                        onClick={onOpenQuoteModal}
-                        className="text-xs text-[#7D1D2C] hover:underline font-medium cursor-pointer"
-                      >
-                        Enquire
-                      </button>
                     </div>
                   </div>
                 </div>

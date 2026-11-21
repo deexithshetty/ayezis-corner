@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Mail, MapPin, Sparkles, Send, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, Phone, Mail, MapPin, Sparkles, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import { siteConfig, getWhatsAppLink } from '../../config/siteConfig';
 import { PageRoute } from '../../types/navigation';
 
@@ -8,7 +8,7 @@ interface ContactPageProps {
   onOpenQuoteModal: () => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuoteModal }) => {
+export const ContactPage: React.FC<ContactPageProps> = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -19,23 +19,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuot
   });
   const [submitted, setSubmitted] = useState(false);
 
+  const buildEnquiryMessage = () =>
+    `Hi Ayezis Corner, I'm submitting an enquiry via your website:\nName: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.service}\nOccasion: ${formData.occasion}\nEvent Date: ${formData.date || 'TBD'}\nDetails: ${formData.message || 'None'}`;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.phone.trim()) return;
 
-    const msg = `Hi Ayezis Corner, I'm submitting an enquiry via your website:\nName: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.service}\nOccasion: ${formData.occasion}\nEvent Date: ${formData.date || 'TBD'}\nDetails: ${formData.message || 'None'}`;
-    window.open(getWhatsAppLink(msg), '_blank');
+    const msg = buildEnquiryMessage();
+    window.open(getWhatsAppLink(msg), '_blank', 'noopener,noreferrer');
     setSubmitted(true);
   };
 
   return (
-    <div className="bg-[#FAF7F2] min-h-screen">
-      {/* 1. Header Banner */}
+    <div className="bg-[#FAF7F2]">
+      {/* 1. Unified Contact Header */}
       <section className="py-16 sm:py-24 bg-[#FFFDF9] border-b border-[#E8DFD3]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7F2] border border-[#E8DFD3] text-[#7D1D2C] text-xs font-semibold tracking-[0.2em] uppercase">
             <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Connect &amp; Collaborate</span>
+            <span>Contact &amp; Direct Connect</span>
           </span>
 
           <h1 className="font-serif text-4xl sm:text-6xl font-light text-[#32070F] tracking-tight">
@@ -43,19 +46,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuot
           </h1>
 
           <p className="text-base sm:text-lg text-[#61524F] max-w-2xl mx-auto font-light leading-relaxed">
-            We are here to help curate your event decoration or customize a thoughtful gift hamper. Reach out via WhatsApp or submit your enquiry below.
+            Have an upcoming occasion in mind? Reach out to our studio directly by phone, email, or WhatsApp, or share your event and gifting details below.
           </p>
         </div>
       </section>
 
-      {/* 2. Main Contact Grid */}
+      {/* 2. Unified Contact Grid: Studio Details + Enquiry Form */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Direct channels (5 cols) */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Direct Studio Channels (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-2.5">
               <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#7D1D2C]">
-                Get In Touch
+                Consult With Our Studio
               </span>
               <h2 className="font-serif text-3xl font-light text-[#32070F]">
                 Direct Studio Channels
@@ -82,58 +85,81 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuot
               </div>
 
               <p className="text-xs text-[#524441] leading-relaxed">
-                Chat directly with our team to check availability, share photos, or discuss pricing.
+                Chat directly with our team to check availability, share photos, or discuss custom hampers and décor.
               </p>
 
               <a
-                href={getWhatsAppLink()}
+                href={getWhatsAppLink("Hi Ayezis Corner, I'd like to consult with you about your services.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 px-5 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 fill-white" />
-                <span>Chat on WhatsApp (+91 {siteConfig.phone})</span>
+                <span>Chat on WhatsApp ({siteConfig.whatsappDisplay})</span>
               </a>
             </div>
 
-            {/* Other Channels */}
-            <div className="space-y-4">
+            {/* Phone, Email & Studio Address */}
+            <div className="space-y-3.5">
               {/* Phone */}
               <a
-                href={`tel:${siteConfig.phone}`}
-                className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] hover:border-[#7D1D2C] transition-all flex items-center gap-4 group"
+                href={`tel:+${siteConfig.phone}`}
+                className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] hover:border-[#C5A059] transition-all flex items-center gap-4 group"
               >
-                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-[#E8DFD3] text-[#7D1D2C] flex items-center justify-center shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">Phone Call</span>
-                  <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C]">{siteConfig.phone}</p>
+                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">
+                    Call Directly
+                  </span>
+                  <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C] transition-colors">
+                    {siteConfig.whatsappDisplay}
+                  </p>
                 </div>
               </a>
 
               {/* Email */}
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] hover:border-[#7D1D2C] transition-all flex items-center gap-4 group"
+                className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] hover:border-[#C5A059] transition-all flex items-center gap-4 group"
               >
-                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-[#E8DFD3] text-[#7D1D2C] flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
-                <div>
-                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">Email Inquiries</span>
-                  <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C]">{siteConfig.email}</p>
+                <div className="min-w-0">
+                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">
+                    Email Inquiries
+                  </span>
+                  <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C] transition-colors break-all">
+                    {siteConfig.email}
+                  </p>
                 </div>
               </a>
 
-              {/* Address */}
-              <div className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center shrink-0">
+              {/* Studio Address */}
+              <div className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E8DFD3] flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-[#E8DFD3] text-[#7D1D2C] flex items-center justify-center shrink-0 mt-0.5">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <div>
-                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">Studio Location</span>
-                  <p className="text-sm font-semibold text-[#32070F]">{siteConfig.address}</p>
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">
+                    Studio Location
+                  </span>
+                  <p className="text-sm font-semibold text-[#32070F] leading-snug">
+                    {siteConfig.address}
+                  </p>
+                  {siteConfig.googleMapsUrl && (
+                    <a
+                      href={siteConfig.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-[#7D1D2C] hover:underline"
+                    >
+                      <span>View on Google Maps</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -157,15 +183,34 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenQuot
                 <p className="text-sm text-[#524441] max-w-md mx-auto">
                   Your enquiry has been prepared. If WhatsApp didn’t open automatically, click the button below to connect with us.
                 </p>
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-md"
-                >
-                  <MessageCircle className="w-4 h-4 fill-white" />
-                  <span>Open WhatsApp</span>
-                </a>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                  <a
+                    href={getWhatsAppLink(buildEnquiryMessage())}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-md"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <span>Open WhatsApp</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        name: '',
+                        phone: '',
+                        service: 'Event Decoration',
+                        occasion: 'Wedding & Pre-Wedding',
+                        date: '',
+                        message: '',
+                      });
+                    }}
+                    className="px-5 py-3 text-xs sm:text-sm font-medium text-[#4A0E18] bg-[#FAF7F2] hover:bg-[#EAE0D2] rounded-full border border-[#D8CEBE] transition-colors cursor-pointer"
+                  >
+                    Send Another Enquiry
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">

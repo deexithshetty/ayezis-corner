@@ -1,8 +1,9 @@
 import React from 'react';
-import { Gift, Sparkles, HeartHandshake, Phone, Mail, MapPin, MessageCircle, ArrowRight } from 'lucide-react';
-import { siteConfig, getWhatsAppLink } from '../../config/siteConfig';
+import { Gift, Sparkles, HeartHandshake, ArrowRight } from 'lucide-react';
+import { siteConfig } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
+import aboutBeachDecorImg from '../../assets/images/about_beach_decor_1795250340690.jpg';
 
 interface AboutPageProps {
   onNavigate: (route: PageRoute) => void;
@@ -30,15 +31,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenQuoteMod
         </div>
       </section>
 
-      {/* 2. Main Editorial Story with the designated decorations-02.jpeg image */}
+      {/* 2. Main Editorial Story */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Visual side with required decorations-02.jpeg */}
+          {/* Visual side */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#D8CEBE] aspect-4/3 sm:aspect-5/4 bg-[#EAE0D2]">
               <ResilientImage
-                src="/images/decorations/decorations-02.jpeg"
-                alt="Ayezis Corner Celebration Styling & Gifting"
+                src={aboutBeachDecorImg}
+                alt="Beachside event decoration with floral arch, warm fairy lights, flowers, and gold lanterns by Ayezis Corner"
                 className="w-full h-full object-cover"
                 fallbackTitle="Ayezis Corner Story"
               />
@@ -191,71 +192,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenQuoteMod
                 Direct consultation via WhatsApp, punctual on-site installation, and thorough quality inspection before handover.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Studio Location & Direct Contact Channels */}
-      <section className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FAF7F2] p-8 sm:p-12 rounded-3xl border border-[#D8CEBE] shadow-sm space-y-8 text-center sm:text-left">
-          <div className="space-y-2 text-center">
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#7D1D2C]">
-              Direct Connect
-            </span>
-            <h3 className="font-serif text-3xl font-light text-[#32070F]">
-              Consult With Our Studio
-            </h3>
-            <p className="text-sm text-[#61524F]">
-              Have an upcoming occasion in mind? Reach out to us directly through any of our channels.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-            {/* Phone */}
-            <a
-              href={`tel:${siteConfig.phone}`}
-              className="p-5 rounded-2xl bg-white border border-[#E8DFD3] hover:border-[#7D1D2C] transition-colors text-center space-y-2 group"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center mx-auto">
-                <Phone className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-semibold text-[#7D6B67] uppercase tracking-wider block">Call Directly</span>
-              <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C]">{siteConfig.phone}</p>
-            </a>
-
-            {/* Email */}
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="p-5 rounded-2xl bg-white border border-[#E8DFD3] hover:border-[#7D1D2C] transition-colors text-center space-y-2 group"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center mx-auto">
-                <Mail className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-semibold text-[#7D6B67] uppercase tracking-wider block">Send Email</span>
-              <p className="text-sm font-semibold text-[#32070F] group-hover:text-[#7D1D2C] break-all">{siteConfig.email}</p>
-            </a>
-
-            {/* Location */}
-            <div className="p-5 rounded-2xl bg-white border border-[#E8DFD3] text-center space-y-2">
-              <div className="w-10 h-10 rounded-full bg-[#FAF7F2] text-[#7D1D2C] flex items-center justify-center mx-auto">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-semibold text-[#7D6B67] uppercase tracking-wider block">Studio Location</span>
-              <p className="text-sm font-semibold text-[#32070F]">{siteConfig.address}</p>
-            </div>
-          </div>
-
-          {/* WhatsApp Primary Banner */}
-          <div className="pt-2 text-center">
-            <a
-              href={getWhatsAppLink("Hi Ayezis Corner, I'd like to consult with you about your services.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-md transition-all cursor-pointer"
-            >
-              <MessageCircle className="w-5 h-5 fill-white" />
-              <span>Chat on WhatsApp (+91 {siteConfig.phone})</span>
-            </a>
           </div>
         </div>
       </section>

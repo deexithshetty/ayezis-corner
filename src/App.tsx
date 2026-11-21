@@ -13,6 +13,8 @@ import { HomePage } from './components/pages/HomePage';
 import { GalleryPage } from './components/pages/GalleryPage';
 import { AboutPage } from './components/pages/AboutPage';
 import { ContactPage } from './components/pages/ContactPage';
+import { CartProvider } from './context/CartContext';
+import { CartDrawer } from './components/CartDrawer';
 
 const validRoutes: PageRoute[] = ['home', 'services', 'decorations', 'gifts', 'gallery', 'about', 'contact'];
 
@@ -105,56 +107,61 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#241E1C] flex flex-col font-sans selection:bg-[#7D1D2C]/15 selection:text-[#7D1D2C]">
-      {/* 1. Clean Sticky Minimal Navbar */}
-      <Navbar
-        currentRoute={currentRoute}
-        onNavigate={navigateTo}
-        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-      />
+    <CartProvider>
+      <div className="min-h-screen bg-[#FAF7F2] text-[#241E1C] flex flex-col font-sans selection:bg-[#7D1D2C]/15 selection:text-[#7D1D2C]">
+        {/* 1. Clean Sticky Minimal Navbar */}
+        <Navbar
+          currentRoute={currentRoute}
+          onNavigate={navigateTo}
+          onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+        />
 
-      {/* 2. Single-Page Scrolling Sections */}
-      <main className="flex-1">
-        <div id="home" className="scroll-mt-20">
-          <HomePage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        </div>
+        {/* 2. Single-Page Scrolling Sections */}
+        <main className="flex-1">
+          <div id="home" className="scroll-mt-20">
+            <HomePage
+              onNavigate={navigateTo}
+              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+            />
+          </div>
 
-        <div id="gallery" className="scroll-mt-20 border-t border-[#E8DFD3]">
-          <GalleryPage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        </div>
+          <div id="gallery" className="scroll-mt-20 border-t border-[#E8DFD3]">
+            <GalleryPage
+              onNavigate={navigateTo}
+              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+            />
+          </div>
 
-        <div id="about" className="scroll-mt-20 border-t border-[#E8DFD3]">
-          <AboutPage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        </div>
+          <div id="about" className="scroll-mt-20 border-t border-[#E8DFD3]">
+            <AboutPage
+              onNavigate={navigateTo}
+              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+            />
+          </div>
 
-        <div id="contact" className="scroll-mt-20 border-t border-[#E8DFD3]">
-          <ContactPage
-            onNavigate={navigateTo}
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        </div>
-      </main>
+          <div id="contact" className="scroll-mt-20 border-t border-[#E8DFD3]">
+            <ContactPage
+              onNavigate={navigateTo}
+              onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+            />
+          </div>
+        </main>
 
-      {/* 3. Minimal Editorial Footer */}
-      <Footer onNavigate={navigateTo} />
+        {/* 3. Minimal Editorial Footer */}
+        <Footer onNavigate={navigateTo} />
 
-      {/* 4. Floating WhatsApp Action */}
-      <WhatsAppFloatingButton />
+        {/* 4. Floating WhatsApp Action */}
+        <WhatsAppFloatingButton />
 
-      {/* 5. Quick Consultation Modal */}
-      <QuickQuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-      />
-    </div>
+        {/* 5. Quick Consultation Modal */}
+        <QuickQuoteModal
+          isOpen={isQuoteModalOpen}
+          onClose={() => setIsQuoteModalOpen(false)}
+        />
+
+        {/* 6. Gift & Hamper Shopping Cart Drawer */}
+        <CartDrawer onNavigate={navigateTo} />
+      </div>
+    </CartProvider>
   );
 }

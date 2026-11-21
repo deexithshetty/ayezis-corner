@@ -11,6 +11,11 @@ import stageTableImg from '../assets/images/carousel_stage_table_1794293630931.j
 import dessertTablesImg from '../assets/images/carousel_dessert_tables_1794293632446.jpg';
 import outdoorBeachImg from '../assets/images/carousel_outdoor_beach_1794293633830.jpg';
 import homeEventsImg from '../assets/images/carousel_home_events_1794293633355.jpg';
+import chocolateHamperImg from '../assets/images/carousel_chocolate_hamper_1795248879558.jpg';
+import weddingHamperImg from '../assets/images/carousel_wedding_hamper_1795248879648.jpg';
+import babyHamperImg from '../assets/images/carousel_baby_hamper_1795248880297.jpg';
+import festiveGiftBoxImg from '../assets/images/carousel_festive_gift_box_1795248879729.jpg';
+import corporateHamperImg from '../assets/images/carousel_corporate_hamper_1795248881263.jpg';
 
 export interface CarouselSlide {
   id: string;
@@ -25,9 +30,19 @@ const slides: CarouselSlide[] = [
     image: weddingDecorImg,
   },
   {
+    id: 'slide-chocolate-hamper',
+    alt: 'Luxury Chocolate Gift Hamper – Ayezis Corner',
+    image: chocolateHamperImg,
+  },
+  {
     id: 'slide-2',
     alt: 'Baby Celebrations – Ayezis Corner',
     image: babyCelebrationsImg,
+  },
+  {
+    id: 'slide-baby-hamper',
+    alt: 'Baby Welcome Gift Hamper – Ayezis Corner',
+    image: babyHamperImg,
   },
   {
     id: 'slide-3',
@@ -35,9 +50,19 @@ const slides: CarouselSlide[] = [
     image: eidRamadanImg,
   },
   {
+    id: 'slide-festive-box',
+    alt: 'Festive Gift Box – Ayezis Corner',
+    image: festiveGiftBoxImg,
+  },
+  {
     id: 'slide-4',
     alt: 'Corporate Events – Ayezis Corner',
     image: corporateEventsImg,
+  },
+  {
+    id: 'slide-corporate-hamper',
+    alt: 'Executive Corporate Gift Hamper – Ayezis Corner',
+    image: corporateHamperImg,
   },
   {
     id: 'slide-5',
@@ -58,6 +83,11 @@ const slides: CarouselSlide[] = [
     id: 'slide-8',
     alt: 'Home & Special Events – Ayezis Corner',
     image: homeEventsImg,
+  },
+  {
+    id: 'slide-wedding-hamper',
+    alt: 'Luxury Wedding Gift Hamper – Ayezis Corner',
+    image: weddingHamperImg,
   },
 ];
 

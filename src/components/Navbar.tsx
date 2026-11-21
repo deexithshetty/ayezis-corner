@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, MessageCircle, Sparkles } from 'lucide-react';
+import { Menu, X, MessageCircle, Sparkles, ShoppingBag } from 'lucide-react';
 import { siteConfig, getWhatsAppLink } from '../config/siteConfig';
 import { PageRoute } from '../types/navigation';
+import { useCart } from '../context/CartContext';
 
 interface NavbarProps {
   currentRoute: PageRoute;
@@ -13,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const { totalItems, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,8 +100,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
             })}
           </nav>
 
-          {/* Right Side: "Plan your event" Golden CTA Button + WhatsApp */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Right Side: Cart + "Plan your event" Golden CTA Button + WhatsApp */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Gift Cart Button with Live Count */}
+            <button
+              type="button"
+              onClick={openCart}
+              aria-label={`Open gift cart (${totalItems} ${totalItems === 1 ? 'item' : 'items'})`}
+              title="Gift Enquiry Cart"
+              className="relative inline-flex items-center justify-center w-10 h-10 rounded-xl border border-[#DFBE7A]/35 text-[#DFBE7A] hover:border-[#DFBE7A] hover:bg-[#DFBE7A]/10 transition-all cursor-pointer shrink-0"
+            >
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-[#DFBE7A] text-[#1A0307] text-[10px] font-bold flex items-center justify-center shadow-md border border-[#0E0305]">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
+            </button>
+
             {/* WhatsApp Icon Button */}
             <a
               href={getWhatsAppLink()}
@@ -115,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
             {/* "Plan your event" button styled exactly like screenshot */}
             <button
               onClick={onOpenQuoteModal}
-              className="px-5 py-2.5 text-xs sm:text-sm font-medium tracking-wide text-[#1A0307] bg-[#DFBE7A] hover:bg-[#C5A059] active:scale-[0.98] rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap font-sans"
+              className="px-3.5 sm:px-5 py-2.5 text-xs sm:text-sm font-medium tracking-wide text-[#1A0307] bg-[#DFBE7A] hover:bg-[#C5A059] active:scale-[0.98] rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap font-sans"
             >
               Plan your event
             </button>
@@ -173,6 +191,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
 
           {/* Bottom Actions */}
           <div className="space-y-3 pt-6 border-t border-white/10">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openCart();
+              }}
+              className="w-full py-3.5 px-6 rounded-xl border border-[#DFBE7A]/40 bg-[#DFBE7A]/10 text-[#DFBE7A] font-semibold text-center flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              <span>Gift Cart ({totalItems})</span>
+            </button>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

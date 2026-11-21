@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { ArrowRight, ArrowUpRight, Sparkles, MessageCircle } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Sparkles, MessageCircle, ShoppingBag, Check } from 'lucide-react';
 import { getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
 import { HeroCarousel } from '../HeroCarousel';
+import { useCart } from '../../context/CartContext';
 
 interface HomePageProps {
   onNavigate: (route: PageRoute) => void;
@@ -12,6 +13,7 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal }) => {
+  const { addItem, getItemQuantity, openCart } = useCart();
   return (
     <div className="space-y-0 bg-[#0E0305]">
       {/* 1. Hero Section */}
@@ -302,29 +304,95 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-      {[
-  { title: 'Floral Bedroom Decoration', img: '/images/decorations/new-wedding-floral-stage.jpeg', cat: 'Decor' },
-  { title: 'Chocolate Gift Tower', img: '/images/hampers/new-decorated-gift-hamper.jpeg', cat: 'Hampers' },
-  { title: 'Personalized Kids Gift Set', img: '/images/baby-newborn/baby-newborn-02.jpeg', cat: 'Baby' },
-  { title: 'Festive Gift Hampers', img: '/images/hampers/hampers-01.jpeg', cat: 'Hampers' },
-      ].map((item, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => onNavigate('gallery')}
-                  className="group relative rounded-2xl overflow-hidden aspect-4/5 bg-[#EAE0D2] border border-[#D8CEBE] cursor-pointer shadow-xs hover:shadow-lg transition-all"
-                >
-                  <ResilientImage
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+              {[
+                {
+                  id: 'new-new-wedding-floral-stage',
+                  title: 'Floral Bedroom Decoration',
+                  img: '/images/decorations/new-wedding-floral-stage.jpeg',
+                  cat: 'Decor',
+                  cartEligible: false,
+                },
+                {
+                  id: 'new-new-decorated-gift-hamper',
+                  title: 'Chocolate Gift Tower',
+                  img: '/images/hampers/new-decorated-gift-hamper.jpeg',
+                  cat: 'Hampers',
+                  cartEligible: true,
+                },
+                {
+                  id: 'baby-02',
+                  title: 'Personalized Kids Gift Set',
+                  img: '/images/baby-newborn/baby-newborn-02.jpeg',
+                  cat: 'Baby & Newborn',
+                  cartEligible: true,
+                },
+                {
+                  id: 'hampers-01',
+                  title: 'Festive Gift Hampers',
+                  img: '/images/hampers/hampers-01.jpeg',
+                  cat: 'Hampers',
+                  cartEligible: true,
+                },
+              ].map((item) => {
+                const qty = item.cartEligible ? getItemQuantity(item.id) : 0;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => onNavigate('gallery')}
+                    className="group relative rounded-2xl overflow-hidden aspect-4/5 bg-[#EAE0D2] border border-[#D8CEBE] cursor-pointer shadow-xs hover:shadow-lg transition-all"
+                  >
+                    <ResilientImage
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
-                    <span className="text-[10px] uppercase tracking-wider text-[#DFBE7A] font-medium">{item.cat}</span>
-                    <p className="font-serif text-sm font-light">{item.title}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent p-3 sm:p-4 flex flex-col justify-end text-white">
+                      <span className="text-[10px] uppercase tracking-wider text-[#DFBE7A] font-medium">
+                        {item.cat}
+                      </span>
+                      <p className="font-serif text-sm font-light">{item.title}</p>
+
+                      {item.cartEligible && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (qty > 0) {
+                              openCart();
+                            } else {
+                              addItem({
+                                id: item.id,
+                                name: item.title,
+                                image: item.img,
+                                category: item.cat,
+                                priceLabel: 'Price on Request',
+                              });
+                            }
+                          }}
+                          className={`mt-2.5 w-full py-1.5 px-2.5 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer backdrop-blur-xs ${
+                            qty > 0
+                              ? 'bg-[#DFBE7A] text-[#1A0307] hover:bg-[#C5A059]'
+                              : 'bg-[#7D1D2C]/90 text-[#FAF7F2] hover:bg-[#7D1D2C] border border-[#DFBE7A]/40'
+                          }`}
+                        >
+                          {qty > 0 ? (
+                            <>
+                              <Check className="w-3.5 h-3.5" />
+                              <span>In Cart ({qty})</span>
+                            </>
+                          ) : (
+                            <>
+                              <ShoppingBag className="w-3.5 h-3.5 text-[#DFBE7A]" />
+                              <span>Add to Cart</span>
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-8 text-center sm:hidden">

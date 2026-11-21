@@ -569,14 +569,6 @@ export const galleryItems: GalleryItem[] = [
     size: 'standard',
   },
   {
-    id: 'new-new-wedding-invitation-cards',
-    title: 'Wedding Invitation Cards',
-    category: 'Wedding & Bridal',
-    image: '/images/wedding-bridal/new-wedding-invitation-cards.jpeg',
-    caption: 'Wedding Invitation Cards from the Ayezis Corner wedding & bridal collection.',
-    size: 'standard',
-  },
-  {
     id: 'new-new-personalized-return-gift-tags',
     title: 'Personalized Return Gift Tags',
     category: 'Customized Gifts',
@@ -842,10 +834,10 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'new-new-event-food-table-setup',
-    title: 'Event Food Table Setup',
-    category: 'Decorations',
+    title: 'Personalized Stainless-Steel Plate Set',
+    category: 'Customized Gifts',
     image: '/images/decorations/new-event-food-table-setup.jpeg',
-    caption: 'Event Food Table Setup from the Ayezis Corner decorations collection.',
+    caption: 'Custom laser-engraved stainless-steel kids dining plate, tumbler, spoon, and fork set from the Ayezis Corner customized gifts collection.',
     size: 'standard',
   },
   {

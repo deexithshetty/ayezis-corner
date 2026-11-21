@@ -6,6 +6,9 @@ import {
   ChevronRight,
   MessageCircle,
   Sparkles,
+  ShoppingBag,
+  Plus,
+  Minus,
 } from 'lucide-react';
 
 import {
@@ -18,6 +21,7 @@ import {
 import { getWhatsAppLink } from '../../config/siteConfig';
 import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
+import { useCart, isCartEligibleGalleryItem } from '../../context/CartContext';
 
 interface GalleryPageProps {
   onNavigate: (route: PageRoute) => void;
@@ -35,6 +39,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
     useState<number | null>(null);
 
   const [showAllImages, setShowAllImages] = useState(false);
+  const { addItem, updateQuantity, getItemQuantity, openCart } = useCart();
 
   const filteredItems =
     activeCategory === 'All'
@@ -146,37 +151,98 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
         {/* Gallery Images */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
 
-          {previewItems.map((item, index) => (
-            <button
-              type="button"
-              key={item.id}
-              onClick={() => openLightbox(index)}
-              aria-label={`View ${item.category} image`}
-              className="group text-left rounded-2xl overflow-hidden border border-[#D8CEBE] hover:border-[#C5A059] bg-white shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer"
-            >
+          {previewItems.map((item, index) => {
+            const canAddToCart = isCartEligibleGalleryItem(item);
+            const qtyInCart = canAddToCart ? getItemQuantity(item.id) : 0;
 
-              <div className="relative aspect-square overflow-hidden bg-[#EAE0D2]">
+            return (
+              <div
+                key={item.id}
+                className="group flex flex-col justify-between text-left rounded-2xl overflow-hidden border border-[#D8CEBE] hover:border-[#C5A059] bg-white shadow-xs hover:shadow-lg transition-all duration-300"
+              >
+                <button
+                  type="button"
+                  onClick={() => openLightbox(index)}
+                  aria-label={`View ${item.title}`}
+                  className="text-left w-full cursor-pointer"
+                >
+                  <div className="relative aspect-square overflow-hidden bg-[#EAE0D2]">
+                    <ResilientImage
+                      src={item.image}
+                      alt={item.title}
+                      fallbackTitle={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                  </div>
 
-                <ResilientImage
-                  src={item.image}
-                  alt={item.title}
-                  fallbackTitle={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
+                  {/* Category Name */}
+                  <div className="px-3 pt-2.5 pb-2">
+                    <span className="block text-xs sm:text-sm font-medium text-[#4A3E3D]">
+                      {item.category === 'Decorations'
+                        ? 'Decoration'
+                        : item.category}
+                    </span>
+                  </div>
+                </button>
 
+                {/* Add to Cart Control — Gifts, Customized Gifts & Hampers Only */}
+                {canAddToCart && (
+                  <div className="px-3 pb-3 pt-0.5">
+                    {qtyInCart > 0 ? (
+                      <div className="flex items-center justify-between gap-1.5 rounded-xl border border-[#C5A059]/60 bg-[#FAF7F2] px-2 py-1">
+                        <div className="inline-flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, -1)}
+                            aria-label={`Decrease quantity of ${item.title}`}
+                            className="w-6 h-6 rounded-md bg-white border border-[#D8CEBE] hover:border-[#7D1D2C] text-[#4A0E18] flex items-center justify-center transition-colors cursor-pointer"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="min-w-[1.25rem] text-center text-xs font-semibold text-[#32070F]">
+                            {qtyInCart}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, 1)}
+                            aria-label={`Increase quantity of ${item.title}`}
+                            className="w-6 h-6 rounded-md bg-white border border-[#D8CEBE] hover:border-[#7D1D2C] text-[#4A0E18] flex items-center justify-center transition-colors cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={openCart}
+                          className="text-[11px] font-semibold text-[#7D1D2C] hover:underline whitespace-nowrap cursor-pointer pr-1"
+                        >
+                          View Cart
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addItem({
+                            id: item.id,
+                            name: item.title,
+                            image: item.image,
+                            category: item.category,
+                            priceLabel: 'Price on Request',
+                          })
+                        }
+                        className="w-full py-1.5 px-3 rounded-xl bg-[#7D1D2C] hover:bg-[#5F1420] active:scale-[0.98] text-[#FAF7F2] text-xs font-medium transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5 text-[#DFBE7A]" />
+                        <span>Add to Cart</span>
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
-
-              {/* Only Category Name */}
-              <div className="px-3 py-2.5">
-                <span className="block text-xs sm:text-sm font-medium text-[#4A3E3D]">
-                  {item.category === 'Decorations'
-                    ? 'Decoration'
-                    : item.category}
-                </span>
-              </div>
-
-            </button>
-          ))}
+            );
+          })}
 
         </div>
 
@@ -291,14 +357,21 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
 
             </div>
 
-            {/* Image Caption and WhatsApp */}
+            {/* Image Caption, Cart Action (Gifts/Hampers only) and WhatsApp */}
             <div className="p-6 bg-[#FAF7F2] border-t border-[#E8DFD3] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
               <div className="space-y-1">
 
-                <h4 className="font-serif text-xl font-medium text-[#32070F]">
-                  {currentItem.title}
-                </h4>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h4 className="font-serif text-xl font-medium text-[#32070F]">
+                    {currentItem.title}
+                  </h4>
+                  {isCartEligibleGalleryItem(currentItem) && (
+                    <span className="text-[11px] font-medium text-[#7D1D2C] bg-[#FFFDF9] border border-[#D8CEBE] px-2.5 py-0.5 rounded-full">
+                      Price on Request
+                    </span>
+                  )}
+                </div>
 
                 <p className="text-xs sm:text-sm text-[#5D4E4B] max-w-xl">
                   {currentItem.caption}
@@ -306,17 +379,55 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
 
               </div>
 
-              <a
-                href={getWhatsAppLink(
-                  `Hi Ayezis Corner, I'm interested in this design from your gallery: ${currentItem.title}`
+              <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-center shrink-0">
+                {isCartEligibleGalleryItem(currentItem) && (
+                  (() => {
+                    const lightboxQty = getItemQuantity(currentItem.id);
+                    return lightboxQty > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          closeLightbox();
+                          openCart();
+                        }}
+                        className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#7D1D2C] hover:bg-[#5F1420] rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+                      >
+                        <ShoppingBag className="w-4 h-4 text-[#DFBE7A]" />
+                        <span>In Cart ({lightboxQty}) · View</span>
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          addItem({
+                            id: currentItem.id,
+                            name: currentItem.title,
+                            image: currentItem.image,
+                            category: currentItem.category,
+                            priceLabel: 'Price on Request',
+                          })
+                        }
+                        className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#7D1D2C] hover:bg-[#5F1420] rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+                      >
+                        <ShoppingBag className="w-4 h-4 text-[#DFBE7A]" />
+                        <span>Add to Cart</span>
+                      </button>
+                    );
+                  })()
                 )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap self-start sm:self-center"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>Enquire This on WhatsApp</span>
-              </a>
+
+                <a
+                  href={getWhatsAppLink(
+                    `Hi Ayezis Corner, I'm interested in this design from your gallery: ${currentItem.title}`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#25D366] hover:bg-[#20BA5A] rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>Enquire This on WhatsApp</span>
+                </a>
+              </div>
 
             </div>
 
