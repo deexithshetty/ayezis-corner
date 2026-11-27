@@ -105,9 +105,6 @@ export const GallerySection: React.FC = () => {
                       <h3 className="font-serif text-lg sm:text-xl font-bold">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-white/80 line-clamp-2 max-w-lg">
-                        {item.caption}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -168,15 +165,12 @@ export const GallerySection: React.FC = () => {
               </button>
             </div>
 
-            {/* Bottom Caption & WhatsApp Action */}
+            {/* Bottom Title & WhatsApp Action */}
             <div className="p-6 bg-[#FAF7F2] border-t border-[#E8DFD3] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h4 className="font-serif text-xl font-bold text-[#32070F]">
                   {currentItem.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-[#5D4E4B] mt-1 max-w-lg">
-                  {currentItem.caption}
-                </p>
               </div>
 
               <a

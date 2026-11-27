@@ -16,7 +16,9 @@ import { ContactPage } from './components/pages/ContactPage';
 import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/CartDrawer';
 
-const validRoutes: PageRoute[] = ['home', 'services', 'decorations', 'gifts', 'gallery', 'about', 'contact'];
+import { GalleryCategory } from './data/gallery';
+
+const validRoutes: PageRoute[] = ['home', 'services', 'decorations', 'gifts', 'about', 'gallery', 'contact'];
 
 function parseHashRoute(): PageRoute {
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
@@ -29,6 +31,7 @@ function parseHashRoute(): PageRoute {
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => parseHashRoute());
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<GalleryCategory | undefined>(undefined);
 
   const scrollToSection = (route: PageRoute) => {
     if (route === 'home') {
@@ -102,6 +105,13 @@ export default function App() {
 
   const navigateTo = (route: PageRoute) => {
     setCurrentRoute(route);
+    if (route === 'gifts') {
+      setSelectedGalleryCategory('Customized Gifts');
+    } else if (route === 'decorations') {
+      setSelectedGalleryCategory('Decorations');
+    } else if (route === 'gallery') {
+      setSelectedGalleryCategory('All');
+    }
     window.history.replaceState(null, '', route === 'home' ? window.location.pathname : `#${route}`);
     scrollToSection(route);
   };
@@ -125,17 +135,18 @@ export default function App() {
             />
           </div>
 
-          <div id="gallery" className="scroll-mt-20 border-t border-[#E8DFD3]">
-            <GalleryPage
+          <div id="about" className="scroll-mt-20 border-t border-[#E8DFD3]">
+            <AboutPage
               onNavigate={navigateTo}
               onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
             />
           </div>
 
-          <div id="about" className="scroll-mt-20 border-t border-[#E8DFD3]">
-            <AboutPage
+          <div id="gallery" className="scroll-mt-20 border-t border-[#E8DFD3]">
+            <GalleryPage
               onNavigate={navigateTo}
               onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              selectedCategory={selectedGalleryCategory}
             />
           </div>
 

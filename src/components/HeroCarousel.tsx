@@ -3,91 +3,112 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ResilientImage } from './ResilientImage';
 import { PageRoute } from '../types/navigation';
 
-import weddingDecorImg from '../assets/images/carousel_wedding_decor_1794293626409.jpg';
-import babyCelebrationsImg from '../assets/images/carousel_baby_celebrations_1794293628022.jpg';
-import eidRamadanImg from '../assets/images/carousel_eid_ramadan_1794293628301.jpg';
-import corporateEventsImg from '../assets/images/carousel_corporate_events_1794293631668.jpg';
-import stageTableImg from '../assets/images/carousel_stage_table_1794293630931.jpg';
-import dessertTablesImg from '../assets/images/carousel_dessert_tables_1794293632446.jpg';
-import outdoorBeachImg from '../assets/images/carousel_outdoor_beach_1794293633830.jpg';
-import homeEventsImg from '../assets/images/carousel_home_events_1794293633355.jpg';
-import chocolateHamperImg from '../assets/images/carousel_chocolate_hamper_1795248879558.jpg';
-import weddingHamperImg from '../assets/images/carousel_wedding_hamper_1795248879648.jpg';
-import babyHamperImg from '../assets/images/carousel_baby_hamper_1795248880297.jpg';
-import festiveGiftBoxImg from '../assets/images/carousel_festive_gift_box_1795248879729.jpg';
-import corporateHamperImg from '../assets/images/carousel_corporate_hamper_1795248881263.jpg';
-
 export interface CarouselSlide {
   id: string;
+  category: string;
   alt: string;
   image: string;
+  fit: 'cover' | 'contain-framed';
+  objectPosition?: string;
 }
 
 const slides: CarouselSlide[] = [
   {
-    id: 'slide-1',
-    alt: 'Wedding Decorations – Ayezis Corner',
-    image: weddingDecorImg,
+    id: 'slide-blush-wedding-stage',
+    category: 'Wedding & Stage Decorations',
+    alt: 'Blush & Ivory Floral Wedding Stage Setup – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.39_PM_7a8ba3fc.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 45%',
   },
   {
-    id: 'slide-chocolate-hamper',
-    alt: 'Luxury Chocolate Gift Hamper – Ayezis Corner',
-    image: chocolateHamperImg,
+    id: 'slide-chocolate-rose-hamper',
+    category: 'Gift Hampers',
+    alt: 'Luxury Chocolate & Fresh Rose Gift Box Hamper – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.41_PM__2__cbb970ab.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 50%',
   },
   {
-    id: 'slide-2',
-    alt: 'Baby Celebrations – Ayezis Corner',
-    image: babyCelebrationsImg,
+    id: 'slide-pastel-pink-stage',
+    category: 'Wedding & Event Decorations',
+    alt: 'Pastel Blush Rose Arch & Tufted Sofa Stage – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.44_PM__2__5ee581e0.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 45%',
   },
   {
-    id: 'slide-baby-hamper',
-    alt: 'Baby Welcome Gift Hamper – Ayezis Corner',
-    image: babyHamperImg,
+    id: 'slide-ferrero-rose-basket',
+    category: 'Gift Hampers',
+    alt: 'Ferrero Rocher & Red Roses Gold Gift Basket – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.41_PM__1__735e9cf8.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-3',
-    alt: 'Eid & Ramadan – Ayezis Corner',
-    image: eidRamadanImg,
+    id: 'slide-fairylight-backdrop',
+    category: 'Stage Setups',
+    alt: 'Warm Fairy-Light & Floral Wedding Backdrop – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.44_PM_517e81bf.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 40%',
   },
   {
-    id: 'slide-festive-box',
-    alt: 'Festive Gift Box – Ayezis Corner',
-    image: festiveGiftBoxImg,
+    id: 'slide-personalised-prayer-mats',
+    category: 'Customised Gifts',
+    alt: 'Personalised Velvet Couple Prayer Mats with Gold Embroidery – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.43_PM__2__dc2be594.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 50%',
   },
   {
-    id: 'slide-4',
-    alt: 'Corporate Events – Ayezis Corner',
-    image: corporateEventsImg,
+    id: 'slide-mehendi-floral-stage',
+    category: 'Event Decorations',
+    alt: 'Vibrant Mehendi & Haldi Floral Arch Stage Setup – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.40_PM__2__42c38141.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-corporate-hamper',
-    alt: 'Executive Corporate Gift Hamper – Ayezis Corner',
-    image: corporateHamperImg,
+    id: 'slide-led-acrylic-plaque',
+    category: 'Customised Gifts',
+    alt: 'Personalised Illuminated Acrylic Couple LED Plaque – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.43_PM_1a3d9195.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-5',
-    alt: 'Stage & Table Decor – Ayezis Corner',
-    image: stageTableImg,
+    id: 'slide-crimson-rose-arch-stage',
+    category: 'Wedding Decorations',
+    alt: 'Red & Pink Rose Circular Arch Reception Stage – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.41_PM_7ec5ed89.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-6',
-    alt: 'Dessert & Gift Tables – Ayezis Corner',
-    image: dessertTablesImg,
+    id: 'slide-couple-keepsake-frame',
+    category: 'Customised Gifts',
+    alt: 'Personalised Gold-Trimmed Couple Keepsake Frame – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.42_PM_28c7bdd6.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-7',
-    alt: 'Outdoor & Beach Events – Ayezis Corner',
-    image: outdoorBeachImg,
+    id: 'slide-sage-floral-arch-stage',
+    category: 'Stage Setups',
+    alt: 'White Rose & Sage Pleated Drape Circular Arch Stage – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.39_PM__1__ed2311aa.jpeg',
+    fit: 'contain-framed',
   },
   {
-    id: 'slide-8',
-    alt: 'Home & Special Events – Ayezis Corner',
-    image: homeEventsImg,
+    id: 'slide-engraved-led-keepsake',
+    category: 'Customised Gifts',
+    alt: 'Custom Engraved Glowing LED Couple Keepsake Lamp – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.43_PM__1__08f23fb4.jpeg',
+    fit: 'cover',
+    objectPosition: '50% 45%',
   },
   {
-    id: 'slide-wedding-hamper',
-    alt: 'Luxury Wedding Gift Hamper – Ayezis Corner',
-    image: weddingHamperImg,
+    id: 'slide-ivory-floral-arch-stage',
+    category: 'Event Decorations',
+    alt: 'Ivory Rose & Fairy-Light Celebration Stage – Ayezis Corner',
+    image: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_2.08.40_PM__1__cebf8f74.jpeg',
+    fit: 'contain-framed',
   },
 ];
 
@@ -349,17 +370,34 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = () => {
                 }`}
               >
                 {/* Background Image */}
-                <ResilientImage
-                  src={slide.image}
-                  alt={slide.alt}
-                  className="w-full h-full object-cover"
-                />
+                {slide.fit === 'contain-framed' ? (
+                  <div className="relative w-full h-full bg-[#160508]">
+                    <img
+                      src={slide.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover scale-115 blur-xl opacity-45"
+                    />
+                    <ResilientImage
+                      src={slide.image}
+                      alt={slide.alt}
+                      className="relative z-10 w-full h-full object-contain object-center"
+                    />
+                  </div>
+                ) : (
+                  <ResilientImage
+                    src={slide.image}
+                    alt={slide.alt}
+                    style={{ objectPosition: slide.objectPosition || 'center center' }}
+                    className="w-full h-full object-cover"
+                  />
+                )}
 
                 {/* Subtle Bottom Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                 {/* Only "Ayezis Corner" below each image */}
-                <div className="absolute bottom-5 left-4 right-4 text-center">
+                <div className="absolute bottom-5 left-4 right-4 z-20 text-center pointer-events-none">
                   <span className="font-serif text-xs sm:text-sm tracking-[0.2em] text-[#DFBE7A] font-medium">
                     Ayezis Corner
                   </span>

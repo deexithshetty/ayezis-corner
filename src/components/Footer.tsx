@@ -39,8 +39,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Home</button>
               <button onClick={() => onNavigate('decorations')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Event Decorations</button>
               <button onClick={() => onNavigate('gifts')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Customized Gifts</button>
-              <button onClick={() => onNavigate('gallery')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Visual Gallery</button>
               <button onClick={() => onNavigate('about')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">About Our Studio</button>
+              <button onClick={() => onNavigate('gallery')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Visual Gallery</button>
               <button onClick={() => onNavigate('contact')} className="hover:text-white transition-colors text-center md:text-left cursor-pointer">Contact &amp; Enquiries</button>
             </nav>
           </div>

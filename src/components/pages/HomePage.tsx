@@ -1,19 +1,97 @@
 
-import React from 'react';
-import { ArrowRight, ArrowUpRight, Sparkles, MessageCircle, ShoppingBag, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, ArrowUpRight, Gift, Sparkles, MessageCircle } from 'lucide-react';
 import { getWhatsAppLink } from '../../config/siteConfig';
-import { ResilientImage } from '../ResilientImage';
 import { PageRoute } from '../../types/navigation';
 import { HeroCarousel } from '../HeroCarousel';
-import { useCart } from '../../context/CartContext';
 
 interface HomePageProps {
   onNavigate: (route: PageRoute) => void;
   onOpenQuoteModal: () => void;
 }
 
+const GIFT_CATEGORIES = [
+  "Men's gifts",
+  "Ladies' gifts",
+  "Kids' corner",
+  'Faith & festivities',
+  'Home & keepsakes',
+  'Corporate gifts',
+  'Wedding gifts',
+  'Mementos & trophies',
+  'Return gifts for all occasions',
+  'Wedding invitation cards',
+  'Business cards',
+  'Acrylic QR scanners / stands',
+];
+
+const DECORATION_CATEGORIES = [
+  'Wedding & reception',
+  'Haqiqah celebrations',
+  'Corporate events & gifting',
+  'Achievement celebrations',
+  'Newborn welcoming',
+  'School & college celebrations',
+  'Stalls & exhibition setups',
+  'Shop grand openings',
+  'Brand launches',
+  'Corporate setups',
+];
+
+let hasPlayedServicesEntrance = false;
+
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal }) => {
-  const { addItem, getItemQuantity, openCart } = useCart();
+  const servicesSectionRef = useRef<HTMLDivElement | null>(null);
+  const [servicesVisible, setServicesVisible] = useState<boolean>(hasPlayedServicesEntrance);
+  const [servicesSettled, setServicesSettled] = useState<boolean>(hasPlayedServicesEntrance);
+  const [hoveredCard, setHoveredCard] = useState<'gifts' | 'decorations' | null>(null);
+
+  useEffect(() => {
+    if (hasPlayedServicesEntrance) return;
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      hasPlayedServicesEntrance = true;
+      setServicesVisible(true);
+      setServicesSettled(true);
+      return;
+    }
+
+    const node = servicesSectionRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      hasPlayedServicesEntrance = true;
+      setServicesVisible(true);
+      setServicesSettled(true);
+      return;
+    }
+
+    let settleTimer: number | undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          hasPlayedServicesEntrance = true;
+          setServicesVisible(true);
+          observer.disconnect();
+          settleTimer = window.setTimeout(() => {
+            setServicesSettled(true);
+          }, 950);
+        }
+      },
+      { threshold: 0.14 }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+      if (settleTimer) window.clearTimeout(settleTimer);
+    };
+  }, []);
+
   return (
     <div className="space-y-0 bg-[#0E0305]">
       {/* 1. Hero Section */}
@@ -69,7 +147,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
       </section>
 
       {/* Services Section */}
-      <div id="services" className="scroll-mt-20">
+      <div id="services" ref={servicesSectionRef} className="scroll-mt-20">
 
         {/* Gifts & Decorations Overview */}
         <section className="py-18 sm:py-24 bg-[#FAF7F2] text-[#241E1C]">
@@ -92,7 +170,67 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
             </div>
 
             {/* Two Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+
+              {/* Desktop Connecting Gold Bridge between both cards */}
+              <div
+                aria-hidden="true"
+                className={`hidden lg:flex pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-8 items-center justify-center z-20 transition-opacity duration-300 ${
+                  hoveredCard ? 'opacity-100 svc-connector-active' : 'opacity-0'
+                }`}
+              >
+                <svg
+                  viewBox="0 0 56 24"
+                  className="w-14 h-6 overflow-visible"
+                  fill="none"
+                >
+                  <defs>
+                    <linearGradient id="svcBridgeGold" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#C8A45D" stopOpacity="0.35" />
+                      <stop offset="50%" stopColor="#DFBE7A" stopOpacity="0.95" />
+                      <stop offset="100%" stopColor="#C8A45D" stopOpacity="0.35" />
+                    </linearGradient>
+                    <filter id="svcBridgeGlow" x="-60%" y="-60%" width="220%" height="220%">
+                      <feGaussianBlur stdDeviation="1.8" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <line
+                    x1="2"
+                    y1="12"
+                    x2="54"
+                    y2="12"
+                    stroke="url(#svcBridgeGold)"
+                    strokeWidth="1.25"
+                    strokeLinecap="round"
+                    className="svc-connector-line"
+                  />
+                  <circle cx="2" cy="12" r="2" fill="#C8A45D" opacity="0.7" />
+                  <circle cx="54" cy="12" r="2" fill="#C8A45D" opacity="0.7" />
+                  {hoveredCard && (
+                    <g
+                      key={hoveredCard}
+                      className={
+                        hoveredCard === 'gifts'
+                          ? 'svc-connector-dot-ltr'
+                          : 'svc-connector-dot-rtl'
+                      }
+                    >
+                      <circle
+                        cx="2"
+                        cy="12"
+                        r="3"
+                        fill="#DFBE7A"
+                        filter="url(#svcBridgeGlow)"
+                      />
+                      <circle cx="2" cy="12" r="1.4" fill="#FFFDF9" />
+                    </g>
+                  )}
+                </svg>
+              </div>
 
               {/* Gifts Card */}
               <div
@@ -100,13 +238,24 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 tabIndex={0}
                 aria-label="Explore Gifts & Personalised Keepsakes"
                 onClick={() => onNavigate('gifts')}
+                onMouseEnter={() => setHoveredCard('gifts')}
+                onMouseLeave={() => setHoveredCard((prev) => (prev === 'gifts' ? null : prev))}
+                onFocus={() => setHoveredCard('gifts')}
+                onBlur={() => setHoveredCard((prev) => (prev === 'gifts' ? null : prev))}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     onNavigate('gifts');
                   }
                 }}
-                className="group relative bg-[#FFFDF9] rounded-3xl overflow-hidden border border-[#D8CEBE] hover:border-[#C8A45D] shadow-sm hover:shadow-2xl hover:-translate-y-1.5 active:scale-[0.99] transition-all duration-300 ease-out p-7 sm:p-10 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A45D]"
+                style={{
+                  transitionDelay: servicesSettled ? '0ms' : '0ms',
+                }}
+                className={`svc-card svc-gift-card group relative bg-[#FFFDF9] rounded-3xl overflow-hidden border border-[#D8CEBE] hover:border-[#C8A45D] shadow-sm hover:shadow-[0_18px_40px_-14px_rgba(197,160,89,0.42),0_0_0_1px_rgba(200,164,93,0.35)] hover:-translate-y-1.5 active:scale-[0.99] transition-all ${
+                  servicesSettled ? 'duration-300 ease-out' : 'duration-700 ease-out'
+                } ${
+                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                } p-7 sm:p-10 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A45D]`}
               >
                 <div className="space-y-6">
                   <div className="space-y-3">
@@ -118,9 +267,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
                       <span
                         aria-hidden="true"
-                        className="w-9 h-9 rounded-full bg-[#FBF6EA] border border-[#DCC596] text-[#A9823F] group-hover:bg-[#C8A45D] group-hover:text-white group-hover:border-[#C8A45D] flex items-center justify-center transition-all duration-300 shrink-0"
+                        className="relative w-9 h-9 rounded-full bg-[#FBF6EA] border border-[#DCC596] text-[#A9823F] group-hover:bg-[#C8A45D] group-hover:text-white group-hover:border-[#C8A45D] group-hover:shadow-[0_0_16px_rgba(223,190,122,0.55)] flex items-center justify-center transition-all duration-300 shrink-0"
                       >
-                        <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <Gift className="svc-gift-icon w-4 h-4" />
+                        {/* Subtle champagne-gold sparkles around the gift icon */}
+                        <svg
+                          viewBox="0 0 12 12"
+                          className="svc-gift-sparkle svc-gift-sparkle-1 absolute -top-2 -right-2 w-3 h-3 text-[#DFBE7A]"
+                          fill="currentColor"
+                        >
+                          <path d="M6 0L7.2 4.8L12 6L7.2 7.2L6 12L4.8 7.2L0 6L4.8 4.8L6 0Z" />
+                        </svg>
+                        <svg
+                          viewBox="0 0 12 12"
+                          className="svc-gift-sparkle svc-gift-sparkle-2 absolute -bottom-1.5 -left-2 w-2.5 h-2.5 text-[#C8A45D]"
+                          fill="currentColor"
+                        >
+                          <path d="M6 0L7.2 4.8L12 6L7.2 7.2L6 12L4.8 7.2L0 6L4.8 4.8L6 0Z" />
+                        </svg>
+                        <svg
+                          viewBox="0 0 12 12"
+                          className="svc-gift-sparkle svc-gift-sparkle-3 absolute -top-2.5 left-0 w-2 h-2 text-[#DFBE7A]"
+                          fill="currentColor"
+                        >
+                          <path d="M6 0L7.2 4.8L12 6L7.2 7.2L6 12L4.8 7.2L0 6L4.8 4.8L6 0Z" />
+                        </svg>
                       </span>
                     </div>
 
@@ -135,23 +306,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
                   <div className="border-t border-[#F0E6D8] pt-5">
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                      {[
-                        "Men's gifts",
-                        "Ladies' gifts",
-                        "Kids' corner",
-                        'Faith & festivities',
-                        'Home & keepsakes',
-                        'Corporate gifts',
-                        'Wedding gifts',
-                        'Mementos & trophies',
-                        'Return gifts for all occasions',
-                        'Wedding invitation cards',
-                        'Business cards',
-                        'Acrylic QR scanners / stands',
-                      ].map((category) => (
+                      {GIFT_CATEGORIES.map((category, idx) => (
                         <li
                           key={category}
-                          className="flex items-center gap-2.5 text-sm text-[#4A0E18] py-1 border-b border-[#F0E6D8]/70"
+                          style={{
+                            transitionDelay: servicesSettled ? '0ms' : `${160 + idx * 42}ms`,
+                          }}
+                          className={`flex items-center gap-2.5 text-sm text-[#4A0E18] py-1 border-b border-[#F0E6D8]/70 transition-all duration-500 ease-out ${
+                            servicesVisible
+                              ? 'opacity-100 translate-y-0'
+                              : 'opacity-0 translate-y-2'
+                          }`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C8A45D] shrink-0" />
                           <span>{category}</span>
@@ -170,7 +335,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                     }}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#A9823F] group-hover:text-[#8B692F] cursor-pointer transition-colors"
                   >
-                    <span>Explore gifts</span>
+                    <span className="svc-explore-label">Explore gifts</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
 
@@ -193,15 +358,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 tabIndex={0}
                 aria-label="Explore Decorations & Event Setups"
                 onClick={() => onNavigate('decorations')}
+                onMouseEnter={() => setHoveredCard('decorations')}
+                onMouseLeave={() => setHoveredCard((prev) => (prev === 'decorations' ? null : prev))}
+                onFocus={() => setHoveredCard('decorations')}
+                onBlur={() => setHoveredCard((prev) => (prev === 'decorations' ? null : prev))}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     onNavigate('decorations');
                   }
                 }}
-                className="group relative bg-[#FFFDF9] rounded-3xl overflow-hidden border border-[#D8CEBE] hover:border-[#C8A45D] shadow-sm hover:shadow-2xl hover:-translate-y-1.5 active:scale-[0.99] transition-all duration-300 ease-out p-7 sm:p-10 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A45D]"
+                style={{
+                  transitionDelay: servicesSettled ? '0ms' : '160ms',
+                }}
+                className={`svc-card svc-decor-card group relative bg-[#FFFDF9] rounded-3xl overflow-hidden border border-[#D8CEBE] hover:border-[#C8A45D] shadow-sm hover:shadow-[0_18px_40px_-14px_rgba(197,160,89,0.42),0_0_0_1px_rgba(200,164,93,0.35)] hover:-translate-y-1.5 active:scale-[0.99] transition-all ${
+                  servicesSettled ? 'duration-300 ease-out' : 'duration-700 ease-out'
+                } ${
+                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                } p-7 sm:p-10 flex flex-col justify-between cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A45D]`}
               >
-                <div className="space-y-6">
+                {/* Subtle golden light sweep overlay */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl z-10"
+                >
+                  <div className="svc-gold-sweep-beam" />
+                </div>
+
+                <div className="relative z-20 space-y-6">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
 
@@ -211,9 +395,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
                       <span
                         aria-hidden="true"
-                        className="w-9 h-9 rounded-full bg-[#FBF6EA] border border-[#DCC596] text-[#A9823F] group-hover:bg-[#C8A45D] group-hover:text-white group-hover:border-[#C8A45D] flex items-center justify-center transition-all duration-300 shrink-0"
+                        className="w-9 h-9 rounded-full bg-[#FBF6EA] border border-[#DCC596] text-[#A9823F] group-hover:bg-[#C8A45D] group-hover:text-white group-hover:border-[#C8A45D] group-hover:shadow-[0_0_16px_rgba(223,190,122,0.5)] flex items-center justify-center transition-all duration-300 shrink-0"
                       >
-                        <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <ArrowUpRight className="svc-decor-arrow w-4 h-4 transition-transform duration-300" />
                       </span>
                     </div>
 
@@ -228,21 +412,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
                   <div className="border-t border-[#F0E6D8] pt-5">
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                      {[
-                        'Wedding & reception',
-                        'Haqiqah celebrations',
-                        'Corporate events & gifting',
-                        'Achievement celebrations',
-                        'Newborn welcoming',
-                        'School & college celebrations',
-                        'Stalls & exhibition setups',
-                        'Shop grand openings',
-                        'Brand launches',
-                        'Corporate setups',
-                      ].map((category) => (
+                      {DECORATION_CATEGORIES.map((category, idx) => (
                         <li
                           key={category}
-                          className="flex items-center gap-2.5 text-sm text-[#4A0E18] py-1 border-b border-[#F0E6D8]/70"
+                          style={{
+                            transitionDelay: servicesSettled ? '0ms' : `${260 + idx * 46}ms`,
+                          }}
+                          className={`flex items-center gap-2.5 text-sm text-[#4A0E18] py-1 border-b border-[#F0E6D8]/70 transition-all duration-500 ease-out ${
+                            servicesVisible
+                              ? 'opacity-100 translate-y-0'
+                              : 'opacity-0 translate-y-2'
+                          }`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#C8A45D] shrink-0" />
                           <span>{category}</span>
@@ -252,7 +432,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                   </div>
                 </div>
 
-                <div className="pt-7 mt-7 border-t border-[#F0E6D8] flex items-center justify-between">
+                <div className="relative z-20 pt-7 mt-7 border-t border-[#F0E6D8] flex items-center justify-between">
                   <button
                     type="button"
                     onClick={(e) => {
@@ -261,7 +441,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                     }}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#A9823F] group-hover:text-[#8B692F] cursor-pointer transition-colors"
                   >
-                    <span>Explore decorations</span>
+                    <span className="svc-explore-label">Explore decorations</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
 
@@ -278,130 +458,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </div>
               </div>
 
-            </div>
-          </div>
-        </section>
-
-        {/* 2. Selected Portfolio Section */}
-        <section className="py-14 sm:py-20 bg-[#FAF7F2] text-[#241E1C] border-t border-[#E8DFD3] overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#7D1D2C]">
-                  Selected Portfolio
-                </span>
-                <h3 className="font-serif text-2xl sm:text-3xl font-light text-[#32070F]">
-                  Recent Celebrations &amp; Hampers
-                </h3>
-              </div>
-
-              <button
-                onClick={() => onNavigate('gallery')}
-                className="text-xs sm:text-sm font-semibold text-[#7D1D2C] hover:underline cursor-pointer hidden sm:inline-block"
-              >
-                Explore All 60 Images →
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                {
-                  id: 'new-new-wedding-floral-stage',
-                  title: 'Floral Bedroom Decoration',
-                  img: '/images/decorations/new-wedding-floral-stage.jpeg',
-                  cat: 'Decor',
-                  cartEligible: false,
-                },
-                {
-                  id: 'new-new-decorated-gift-hamper',
-                  title: 'Chocolate Gift Tower',
-                  img: '/images/hampers/new-decorated-gift-hamper.jpeg',
-                  cat: 'Hampers',
-                  cartEligible: true,
-                },
-                {
-                  id: 'baby-02',
-                  title: 'Personalized Kids Gift Set',
-                  img: '/images/baby-newborn/baby-newborn-02.jpeg',
-                  cat: 'Baby & Newborn',
-                  cartEligible: true,
-                },
-                {
-                  id: 'hampers-01',
-                  title: 'Festive Gift Hampers',
-                  img: '/images/hampers/hampers-01.jpeg',
-                  cat: 'Hampers',
-                  cartEligible: true,
-                },
-              ].map((item) => {
-                const qty = item.cartEligible ? getItemQuantity(item.id) : 0;
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => onNavigate('gallery')}
-                    className="group relative rounded-2xl overflow-hidden aspect-4/5 bg-[#EAE0D2] border border-[#D8CEBE] cursor-pointer shadow-xs hover:shadow-lg transition-all"
-                  >
-                    <ResilientImage
-                      src={item.img}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent p-3 sm:p-4 flex flex-col justify-end text-white">
-                      <span className="text-[10px] uppercase tracking-wider text-[#DFBE7A] font-medium">
-                        {item.cat}
-                      </span>
-                      <p className="font-serif text-sm font-light">{item.title}</p>
-
-                      {item.cartEligible && (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (qty > 0) {
-                              openCart();
-                            } else {
-                              addItem({
-                                id: item.id,
-                                name: item.title,
-                                image: item.img,
-                                category: item.cat,
-                                priceLabel: 'Price on Request',
-                              });
-                            }
-                          }}
-                          className={`mt-2.5 w-full py-1.5 px-2.5 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer backdrop-blur-xs ${
-                            qty > 0
-                              ? 'bg-[#DFBE7A] text-[#1A0307] hover:bg-[#C5A059]'
-                              : 'bg-[#7D1D2C]/90 text-[#FAF7F2] hover:bg-[#7D1D2C] border border-[#DFBE7A]/40'
-                          }`}
-                        >
-                          {qty > 0 ? (
-                            <>
-                              <Check className="w-3.5 h-3.5" />
-                              <span>In Cart ({qty})</span>
-                            </>
-                          ) : (
-                            <>
-                              <ShoppingBag className="w-3.5 h-3.5 text-[#DFBE7A]" />
-                              <span>Add to Cart</span>
-                            </>
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 text-center sm:hidden">
-              <button
-                onClick={() => onNavigate('gallery')}
-                className="text-xs font-semibold text-[#7D1D2C] underline"
-              >
-                Explore All 60 Images in Gallery →
-              </button>
             </div>
           </div>
         </section>

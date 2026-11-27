@@ -27,8 +27,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
   const navItems: { label: string; route: PageRoute }[] = [
     { label: 'Home', route: 'home' },
     { label: 'Services', route: 'services' },
-    { label: 'Gallery', route: 'gallery' },
     { label: 'About', route: 'about' },
+    { label: 'Gallery', route: 'gallery' },
     { label: 'Contact', route: 'contact' },
   ];
 
