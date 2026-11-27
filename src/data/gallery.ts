@@ -31,14 +31,6 @@ export interface GalleryItem {
 export const galleryItems: GalleryItem[] = [
   // Curated Featured Items for a Balanced Editorial Experience
   {
-    id: 'decor-09',
-    title: 'Ceremonial Stage Setup with Floral Arch',
-    category: 'Decorations',
-    image: '/images/decorations/decorations-09.jpeg',
-    caption: 'Grand celebration stage featuring a circular floral arch, golden pedestals, crystal chandelier, and ceremonial cradle.',
-    size: 'large',
-  },
-  {
     id: 'gift-31',
     title: 'Executive Tan Leatherette Travel Gift Box',
     category: 'Customized Gifts',

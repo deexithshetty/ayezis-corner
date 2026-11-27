@@ -88,7 +88,7 @@ export const decorationCategories: ServiceCategory[] = [
     id: 'baby-shower-newborn-decor',
     name: 'Baby Shower & Newborn Decorations',
     summary: 'Charming pastel setups, cradle styling, floral backdrops, and joyous welcome installations.',
-    image: '/images/decorations/decorations-09.jpeg',
+    image: '/images/baby-newborn/new-baby-welcome-balloon-backdrop.jpeg',
   },
   {
     id: 'housewarming-home-decor',

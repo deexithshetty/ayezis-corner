@@ -139,18 +139,32 @@ export const ContactSection: React.FC = () => {
                   <span className="text-xs font-serif font-bold">📍</span>
                 </div>
                 <div>
-                  <p className="text-xs text-[#7A6B68]">Studio Address</p>
-                  <p className="font-medium text-[#32070F] text-xs sm:text-sm">{siteConfig.address}</p>
-                  {siteConfig.googleMapsUrl && (
-                    <a
-                      href={siteConfig.googleMapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[#7D1D2C] hover:underline inline-flex items-center gap-1 mt-0.5"
-                    >
-                      <span>View on Google Maps</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                  <p className="text-xs text-[#7A6B68]">Studio Location</p>
+                  {siteConfig.showAddress ? (
+                    <>
+                      <p className="font-medium text-[#32070F] text-xs sm:text-sm">{siteConfig.address}</p>
+                      {siteConfig.googleMapsUrl && (
+                        <a
+                          href={siteConfig.googleMapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-[#7D1D2C] hover:underline inline-flex items-center gap-1 mt-0.5"
+                        >
+                          <span>View on Google Maps</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    <div className="inline-flex items-center gap-2 mt-0.5">
+                      <span
+                        aria-hidden="true"
+                        className="address-coming-soon-dot w-1.5 h-1.5 rounded-full bg-[#C5A059] shrink-0"
+                      />
+                      <p className="font-serif text-sm sm:text-base font-medium text-[#32070F] tracking-wide">
+                        {siteConfig.addressComingSoonLabel}
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>

@@ -146,19 +146,38 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                   <span className="text-[11px] font-semibold text-[#7D6B67] uppercase tracking-wider block">
                     Studio Location
                   </span>
-                  <p className="text-sm font-semibold text-[#32070F] leading-snug">
-                    {siteConfig.address}
-                  </p>
-                  {siteConfig.googleMapsUrl && (
-                    <a
-                      href={siteConfig.googleMapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-medium text-[#7D1D2C] hover:underline"
-                    >
-                      <span>View on Google Maps</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                  {siteConfig.showAddress ? (
+                    <>
+                      <p className="text-sm font-semibold text-[#32070F] leading-snug">
+                        {siteConfig.address}
+                      </p>
+                      {siteConfig.googleMapsUrl && (
+                        <a
+                          href={siteConfig.googleMapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-[#7D1D2C] hover:underline"
+                        >
+                          <span>View on Google Maps</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    <div className="space-y-1 pt-0.5">
+                      <div className="inline-flex items-center gap-2">
+                        <span
+                          aria-hidden="true"
+                          className="address-coming-soon-dot w-2 h-2 rounded-full bg-[#C5A059] shrink-0"
+                        />
+                        <p className="font-serif text-base sm:text-lg font-medium text-[#32070F] tracking-wide leading-snug">
+                          {siteConfig.addressComingSoonLabel}
+                        </p>
+                      </div>
+                      <p className="text-xs text-[#7D6B67] leading-relaxed">
+                        Our studio location details will be unveiled shortly.
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>

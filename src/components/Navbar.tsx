@@ -223,8 +223,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onNavigate, onOpen
               <span>Enquire on WhatsApp</span>
             </a>
 
-            <p className="text-center text-xs text-[#E8DFD3]/60 tracking-wider pt-1">
-              {siteConfig.address} · {siteConfig.phone}
+            <p className="text-center text-xs text-[#E8DFD3]/70 tracking-wider pt-1">
+              {siteConfig.showAddress ? (
+                <>
+                  {siteConfig.address} · {siteConfig.phone}
+                </>
+              ) : (
+                <>
+                  <span className="text-[#DFBE7A]">Studio Location: {siteConfig.addressComingSoonLabel}</span> · {siteConfig.whatsappDisplay}
+                </>
+              )}
             </p>
           </div>
         </div>

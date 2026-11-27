@@ -52,7 +52,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#D8CEBE] bg-[#EAE0D2]">
           <div className="relative aspect-16/10 sm:aspect-21/9 min-h-[360px] max-h-[620px] w-full">
             <ResilientImage
-              src="/images/decorations/decorations-09.jpeg"
+              src="/images/decorations/new-wedding-stage-setup.jpeg"
               alt="Ayezis Corner Event Decoration and Thoughtful Gifting"
               className="w-full h-full object-cover"
               fallbackTitle="Ayezis Corner Event Styling"

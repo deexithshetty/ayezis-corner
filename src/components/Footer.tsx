@@ -53,7 +53,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="space-y-3">
               <p className="flex items-start justify-center md:justify-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#DFBE7A] shrink-0 mt-0.5" />
-                <span>{siteConfig.address}</span>
+                {siteConfig.showAddress ? (
+                  <span>{siteConfig.address}</span>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-[#E8DFD3]/90">
+                    <span>Studio Location:</span>
+                    <span className="inline-flex items-center gap-1.5 font-serif text-sm text-[#DFBE7A] tracking-wide">
+                      <span
+                        aria-hidden="true"
+                        className="address-coming-soon-dot w-1.5 h-1.5 rounded-full bg-[#DFBE7A] shrink-0"
+                      />
+                      <span>{siteConfig.addressComingSoonLabel}</span>
+                    </span>
+                  </span>
+                )}
               </p>
               <p className="flex items-center justify-center md:justify-start gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#DFBE7A] shrink-0" />
